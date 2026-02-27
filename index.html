@@ -66,7 +66,6 @@ th{background:var(--dk);color:#fff;font-size:11px}th:first-child,td:first-child{
 <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
 <button class="btn btn-s on" id="tabA" onclick="setVar('A')" style="background:#d35400;color:#fff;border-color:#d35400">Var. A — Omítka</button>
 <button class="btn btn-s" id="tabB" onclick="setVar('B')">Var. B — ETICS</button>
-<button class="btn btn-s" id="tabAB" onclick="setVar('AB')" style="font-size:11px">A | B</button>
 <span id="ctrlB" style="display:none;flex:1;min-width:280px">
 <span style="display:inline-flex;align-items:center;gap:5px;margin-left:10px">
 <button class="btn btn-s on" id="btnEps" onclick="setInsul('eps')" style="font-size:11px;padding:5px 10px;background:#1e8449;color:#fff;border-color:#1e8449">EPS 70F</button>
@@ -804,7 +803,6 @@ function clampPan(){
 
 /* ===== RENDER ===== */
 function render(){
-if(curVar==='AB'){renderDual();return;}
 var layers=curVar==='A'?layersA:makeBLayers();
 var el=document.getElementById('svgMain');
 /* fade-in animation on variant switch */
@@ -844,56 +842,6 @@ if(r2){r2.setAttribute('fill','transparent');r2.setAttribute('stroke','none');}
 })(i);
 }
 updateBars(layers);
-}
-
-/* ===== DUAL A|B RENDER (feature 1) ===== */
-function renderDual(){
-  var el=document.getElementById('svgMain');
-  el.classList.remove('svg-transition');
-  void el.offsetWidth;
-
-  var lA=layersA, lB=makeBLayers();
-  var svgA=buildSVG(lA,'A');
-  var svgB=buildSVG(lB,'B');
-
-  var h='<div style="display:flex;gap:4px;width:100%">';
-  h+='<div style="flex:1;min-width:0;overflow:hidden;border:2px solid #d35400;border-radius:10px;padding:2px;background:#fdfcfa">';
-  h+=svgA.replace('style="width:100%;height:500px;','style="width:100%;height:400px;');
-  h+='</div>';
-  h+='<div style="flex:1;min-width:0;overflow:hidden;border:2px solid #1e8449;border-radius:10px;padding:2px;background:#fdfcfa">';
-  h+=svgB.replace('style="width:100%;height:500px;','style="width:100%;height:400px;');
-  h+='</div>';
-  h+='</div>';
-
-  el.innerHTML=h;
-  el.classList.add('svg-transition');
-
-  /* tooltips for both sides */
-  var wrap=document.getElementById('svgWrap');
-  var tip=wrap.querySelector('.tip');
-  if(!tip){tip=document.createElement('div');tip.className='tip';wrap.appendChild(tip);}
-
-  var allLyrs=el.querySelectorAll('.lyr');
-  for(var i=0;i<allLyrs.length;i++){
-    (function(idx){
-      var isA=idx<lA.length;
-      var layersList=isA?lA:lB;
-      var localIdx=isA?idx:idx-lA.length;
-      allLyrs[idx].addEventListener('mouseenter',function(){
-        if(!layersList[localIdx])return;
-        var L2=layersList[localIdx];
-        tip.innerHTML='<b>'+L2.n+'</b> — '+L2.t+' mm<br>λ = '+L2.l.toFixed(3).replace('.',',')+' W/(m·K)<br><small>'+(L2.d||'').replace(/\n/g,'<br>')+'</small>';
-        tip.classList.add('show');
-      });
-      allLyrs[idx].addEventListener('mousemove',function(e){
-        var rect=wrap.getBoundingClientRect();
-        tip.style.left=Math.min(e.clientX-rect.left+14,rect.width-200)+'px';
-        tip.style.top=(e.clientY-rect.top-40)+'px';
-      });
-      allLyrs[idx].addEventListener('mouseleave',function(){tip.classList.remove('show');});
-    })(i);
-  }
-  updateBars(lA);
 }
 
 /* ===== ZOOM FUNCTIONS ===== */
@@ -958,9 +906,7 @@ document.getElementById('tabA').className='btn btn-s'+(v==='A'?' on':'');
 document.getElementById('tabA').style.cssText=v==='A'?'background:#d35400;color:#fff;border-color:#d35400':'';
 document.getElementById('tabB').className='btn btn-s'+(v==='B'?' on':'');
 document.getElementById('tabB').style.cssText=v==='B'?'background:#1e8449;color:#fff;border-color:#1e8449':'';
-document.getElementById('tabAB').className='btn btn-s'+(v==='AB'?' on':'');
-document.getElementById('tabAB').style.cssText=v==='AB'?'font-size:11px;background:var(--dk);color:#fff;border-color:var(--dk)':'font-size:11px';
-document.getElementById('ctrlB').style.display=(v==='B'||v==='AB')?'':'none';
+document.getElementById('ctrlB').style.display=v==='B'?'':'none';
 /* reset zoom on variant switch */
 ZM.vx=0;ZM.vy=0;ZM.vw=SVG_W;ZM.vh=SVG_H;
 render();
