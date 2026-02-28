@@ -8,11 +8,11 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--ca:#d35400;--cb:#1e8449;--dk:#0f1b2d;--bg:#f5f0e8}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:#2c2c2c;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:#2c2c2c;-webkit-font-smoothing:antialiased}
 .hdr{background:linear-gradient(135deg,#0f1b2d,#1a5276);padding:22px 16px;text-align:center;border-bottom:3px solid var(--ca)}
 .hdr h1{font-size:20px;color:#fff;letter-spacing:0.5px}.hdr p{color:#7fb3d8;font-size:12px;margin-top:3px}
 .nav{position:sticky;top:0;z-index:10;background:#fff;display:flex;border-bottom:2px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.nav button{flex:1;padding:11px 4px;font-size:12px;border:none;background:#fff;cursor:pointer;color:#888;font-weight:500;font-family:inherit;transition:all .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav button{flex:1;padding:11px 4px;font-size:12px;border:none;background:#fff;cursor:pointer;color:#888;font-weight:500;font-family:inherit;transition:all .15s}
 .nav button:hover{background:#f8f8f8}.nav button.on{color:var(--dk);font-weight:700;border-bottom:3px solid var(--dk)}
 .wrap{max-width:900px;margin:0 auto;padding:14px}
 .sec{display:none}.sec.on{display:block}
@@ -32,10 +32,6 @@ th,td{padding:7px 10px;text-align:center;border-bottom:1px solid #eee;font-size:
 th{background:var(--dk);color:#fff;font-size:11px}th:first-child,td:first-child{text-align:left}
 .tip{position:absolute;background:#0f1b2dee;color:#fff;padding:10px 14px;border-radius:10px;font-size:11px;pointer-events:none;z-index:20;opacity:0;transition:opacity .15s;max-width:280px;line-height:1.45;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
 .tip.show{opacity:1}.tip b{color:#f0b27a}.tip small{color:#8899aa;display:block;margin-top:2px;font-size:10px}
-.tip{max-width:min(280px,calc(100vw - 40px))}
-:focus-visible{outline:2px solid #2471a3;outline-offset:2px;border-radius:4px}
-.nav button:focus-visible{outline-offset:-2px}
-[role="alert"]{font-weight:700}
 .anim-bar{height:8px;border-radius:4px;background:#eee;overflow:hidden;margin:6px 0}
 .anim-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)}
 .param-card{background:#fff;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8e8e8;overflow:hidden}
@@ -58,15 +54,15 @@ th{background:var(--dk);color:#fff;font-size:11px}th:first-child,td:first-child{
 <h1>Porotherm P44 — Srovnání variant obvodové stěny</h1>
 <p>Wienerberger Porotherm 44 Profi Dryfix · Broušená cihla na PU pěnu · Jednovrstvá vs. ETICS · DEK e-shop únor 2026</p>
 </div>
-<div class="nav" role="tablist" aria-label="Sekce aplikace">
-<button class="on" role="tab" id="tab0" aria-selected="true" aria-controls="sec0" onclick="go(0)">&#128269; Řez stěnou</button>
-<button role="tab" id="tab1" aria-selected="false" aria-controls="sec1" onclick="go(1)">&#128202; Parametry</button>
-<button role="tab" id="tab2" aria-selected="false" aria-controls="sec2" onclick="go(2)">&#9878;&#65039; Srovnání</button>
-<button role="tab" id="tab3" aria-selected="false" aria-controls="sec3" onclick="go(3)">&#9728;&#65039; Letní komfort</button>
-<button role="tab" id="tab4" aria-selected="false" aria-controls="sec4" onclick="go(4)">&#128176; Kalkulačka</button>
+<div class="nav">
+<button class="on" onclick="go(0)">&#128269; Řez stěnou</button>
+<button onclick="go(1)">&#128202; Parametry</button>
+<button onclick="go(2)">&#9878;&#65039; Srovnání</button>
+<button onclick="go(3)">&#9728;&#65039; Letní komfort</button>
+<button onclick="go(4)">&#128176; Kalkulačka</button>
 </div>
 <div class="wrap">
-<div class="sec on" id="sec0" role="tabpanel" aria-labelledby="tab0">
+<div class="sec on" id="sec0">
 <div class="box" style="padding:12px">
 <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
 <button class="btn btn-s on" id="tabA" onclick="setVar('A')" style="background:#d35400;color:#fff;border-color:#d35400">Var. A — Omítka</button>
@@ -79,7 +75,7 @@ th{background:var(--dk);color:#fff;font-size:11px}th:first-child,td:first-child{
 </span>
 <span style="display:inline-flex;align-items:center;gap:6px;margin-left:12px">
 <span style="font-size:11px;font-weight:600;color:#555">tl.:</span>
-<input type="range" class="sl" min="60" max="240" step="5" value="150" id="insulSlider" aria-label="Tloušťka izolace" oninput="setInsulThick(+this.value)" style="width:140px;display:inline-block;vertical-align:middle">
+<input type="range" class="sl" min="60" max="240" step="5" value="150" id="insulSlider" oninput="setInsulThick(+this.value)" style="width:140px;display:inline-block;vertical-align:middle">
 <span style="font-size:14px;font-weight:800;color:#1e8449;min-width:55px" id="insulVal">150 mm</span>
 </span>
 </span>
@@ -88,91 +84,28 @@ th{background:var(--dk);color:#fff;font-size:11px}th:first-child,td:first-child{
 <div id="svgMain" style="width:100%;cursor:grab"></div>
 <div id="indBadges" style="position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:5px;pointer-events:none"></div>
 <div style="position:absolute;bottom:8px;right:8px;display:flex;gap:4px;z-index:5">
-<button onclick="zoomIn()" aria-label="Přiblížit" style="width:32px;height:32px;border-radius:8px;border:1px solid #ccc;background:#fff;font-size:18px;cursor:pointer;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.1)">+</button>
-<button onclick="zoomOut()" aria-label="Oddálit" style="width:32px;height:32px;border-radius:8px;border:1px solid #ccc;background:#fff;font-size:18px;cursor:pointer;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.1)">−</button>
-<button onclick="zoomReset()" aria-label="Resetovat zoom" style="height:32px;border-radius:8px;border:1px solid #ccc;background:#fff;font-size:11px;cursor:pointer;padding:0 10px;font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,0.1)">Reset</button>
+<button onclick="zoomIn()" style="width:32px;height:32px;border-radius:8px;border:1px solid #ccc;background:#fff;font-size:18px;cursor:pointer;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.1)">+</button>
+<button onclick="zoomOut()" style="width:32px;height:32px;border-radius:8px;border:1px solid #ccc;background:#fff;font-size:18px;cursor:pointer;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.1)">−</button>
+<button onclick="zoomReset()" style="height:32px;border-radius:8px;border:1px solid #ccc;background:#fff;font-size:11px;cursor:pointer;padding:0 10px;font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,0.1)">Reset</button>
 </div>
 <div style="position:absolute;bottom:8px;left:8px;font-size:10px;color:#aaa;pointer-events:none" id="zoomLbl">100%</div>
 </div>
 <div style="margin-top:8px" id="thkBars"></div>
 </div>
 </div>
-<div class="sec" id="sec1" role="tabpanel" aria-labelledby="tab1"><div style="background:#fff;border-radius:14px;padding:12px 18px;margin-bottom:8px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8e8e8;display:flex;gap:12px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:700;color:#555">Izolace Var. B:</span><button class="btn btn-s inCtrl" data-insul-type="eps" onclick="setInsulGlobal('eps')" style="font-size:11px;padding:5px 10px">EPS 70F</button><button class="btn btn-s inCtrl" data-insul-type="mw" onclick="setInsulGlobal('mw')" style="font-size:11px;padding:5px 10px">Min. vata</button><input type="range" class="sl insulSl" aria-label="Tloušťka izolace" min="60" max="240" step="5" value="150" oninput="setInsulThickGlobal(+this.value)" style="width:140px"><span class="insulLblG" style="font-size:14px;font-weight:800;color:#1e8449;min-width:55px">150 mm</span></div><div id="paramCards"></div></div>
-<div class="sec" id="sec2" role="tabpanel" aria-labelledby="tab2"><div class="box"><h2 style="margin-bottom:4px">Technické srovnání</h2><div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px"><span style="font-size:11px;color:#888">Izolace:</span><button class="btn btn-s inCtrl" data-insul-type="eps" onclick="setInsulGlobal('eps')" style="font-size:10px;padding:4px 8px">EPS 70F</button><button class="btn btn-s inCtrl" data-insul-type="mw" onclick="setInsulGlobal('mw')" style="font-size:10px;padding:4px 8px">Min. vata</button><input type="range" class="sl insulSl" aria-label="Tloušťka izolace" min="60" max="240" step="5" value="150" oninput="setInsulThickGlobal(+this.value)" style="width:120px"><span class="insulLblG" style="font-size:13px;font-weight:700;color:#1e8449">150 mm</span></div><div id="cmpTable"></div></div></div>
-<div class="sec" id="sec3" role="tabpanel" aria-labelledby="tab3"><div class="box"><h2 style="margin-bottom:4px">Letní komfort — interaktivní simulace</h2><p class="sub">Jak stěna chrání před letním přehříváním · Sinusoidální průběh venkovní teploty</p><div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px"><span style="font-size:11px;color:#888">Izolace:</span><button class="btn btn-s inCtrl" data-insul-type="eps" onclick="setInsulGlobal('eps')" style="font-size:10px;padding:4px 8px">EPS 70F</button><button class="btn btn-s inCtrl" data-insul-type="mw" onclick="setInsulGlobal('mw')" style="font-size:10px;padding:4px 8px">Min. vata</button><input type="range" class="sl insulSl" aria-label="Tloušťka izolace" min="60" max="240" step="5" value="150" oninput="setInsulThickGlobal(+this.value)" style="width:120px"><span class="insulLblG" style="font-size:13px;font-weight:700;color:#1e8449">150 mm</span></div><div id="summerUI"></div></div></div>
-<div class="sec" id="sec4" role="tabpanel" aria-labelledby="tab4"><div class="box"><h2 style="margin-bottom:4px">Cenová kalkulačka</h2><p class="sub">Orientační ceny materiálu a práce · DEK e-shop únor 2026</p><div id="calcUI"></div></div></div>
+<div class="sec" id="sec1"><div style="background:#fff;border-radius:14px;padding:12px 18px;margin-bottom:8px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8e8e8;display:flex;gap:12px;flex-wrap:wrap;align-items:center"><span style="font-size:12px;font-weight:700;color:#555">Izolace Var. B:</span><button class="btn btn-s inCtrl" onclick="setInsulGlobal('eps')" style="font-size:11px;padding:5px 10px">EPS 70F</button><button class="btn btn-s inCtrl" onclick="setInsulGlobal('mw')" style="font-size:11px;padding:5px 10px">Min. vata</button><input type="range" class="sl insulSl" min="60" max="240" step="5" value="150" oninput="setInsulThickGlobal(+this.value)" style="width:140px"><span class="insulLblG" style="font-size:14px;font-weight:800;color:#1e8449;min-width:55px">150 mm</span></div><div id="paramCards"></div></div>
+<div class="sec" id="sec2"><div class="box"><h2 style="margin-bottom:4px">Technické srovnání</h2><div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px"><span style="font-size:11px;color:#888">Izolace:</span><button class="btn btn-s inCtrl" onclick="setInsulGlobal('eps')" style="font-size:10px;padding:4px 8px">EPS 70F</button><button class="btn btn-s inCtrl" onclick="setInsulGlobal('mw')" style="font-size:10px;padding:4px 8px">Min. vata</button><input type="range" class="sl insulSl" min="60" max="240" step="5" value="150" oninput="setInsulThickGlobal(+this.value)" style="width:120px"><span class="insulLblG" style="font-size:13px;font-weight:700;color:#1e8449">150 mm</span></div><div id="cmpTable"></div></div></div>
+<div class="sec" id="sec3"><div class="box"><h2 style="margin-bottom:4px">Letní komfort — interaktivní simulace</h2><p class="sub">Jak stěna chrání před letním přehříváním · Sinusoidální průběh venkovní teploty</p><div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px"><span style="font-size:11px;color:#888">Izolace:</span><button class="btn btn-s inCtrl" onclick="setInsulGlobal('eps')" style="font-size:10px;padding:4px 8px">EPS 70F</button><button class="btn btn-s inCtrl" onclick="setInsulGlobal('mw')" style="font-size:10px;padding:4px 8px">Min. vata</button><input type="range" class="sl insulSl" min="60" max="240" step="5" value="150" oninput="setInsulThickGlobal(+this.value)" style="width:120px"><span class="insulLblG" style="font-size:13px;font-weight:700;color:#1e8449">150 mm</span></div><div id="summerUI"></div></div></div>
+<div class="sec" id="sec4"><div class="box"><h2 style="margin-bottom:4px">Cenová kalkulačka</h2><p class="sub">Orientační ceny materiálu a práce · DEK e-shop únor 2026</p><div id="calcUI"></div></div></div>
 <div style="text-align:center;font-size:10px;color:#bbb;padding:18px 0;border-top:1px solid #e0ddd5;margin-top:14px">Orientační kalkulace · Zdroje: DEK, Wienerberger · Únor 2026</div>
 </div>
 <script>
-/**
- * Porotherm P44 — Srovnání variant obvodové stěny
- * Wienerberger Porotherm 44 Profi Dryfix
- * Jednovrstvá vs. ETICS
- *
- * Sekce: Řez stěnou | Parametry | Srovnání | Letní komfort | Kalkulačka
- */
+function go(n){var bs=document.querySelectorAll('.nav button'),ss=document.querySelectorAll('.sec');for(var i=0;i<bs.length;i++){bs[i].className=i===n?'on':'';ss[i].className=i===n?'sec on':'sec';}if(n===1)animateParams();if(n===2)renderCmpTable();if(n===3)renderSummer();}
 
-// ═══ NAVIGACE ═══
-function go(n){
-  var bs=document.querySelectorAll('.nav button'),ss=document.querySelectorAll('.sec');
-  for(var i=0;i<bs.length;i++){
-    bs[i].className=i===n?'on':'';
-    bs[i].setAttribute('aria-selected',i===n?'true':'false');
-    bs[i].setAttribute('tabindex',i===n?'0':'-1');
-    ss[i].className=i===n?'sec on':'sec';
-  }
-  if(n===1)animateParams();if(n===2)renderCmpTable();if(n===3)renderSummer();
-}
-/* Keyboard navigation for tabs: arrow keys */
-document.addEventListener('DOMContentLoaded',function(){
-  var nav=document.querySelector('.nav[role="tablist"]');
-  if(!nav)return;
-  nav.addEventListener('keydown',function(e){
-    var tabs=nav.querySelectorAll('[role="tab"]');
-    var idx=-1;
-    for(var i=0;i<tabs.length;i++){if(tabs[i]===document.activeElement){idx=i;break;}}
-    if(idx===-1)return;
-    var next=-1;
-    if(e.key==='ArrowRight'||e.key==='ArrowDown') next=(idx+1)%tabs.length;
-    else if(e.key==='ArrowLeft'||e.key==='ArrowUp') next=(idx-1+tabs.length)%tabs.length;
-    if(next>=0){e.preventDefault();tabs[next].focus();go(next);}
-  });
-});
-
-// ═══ KONSTANTY ═══
-// Tepelné konstanty
-var Rsi = 0.13;          // Odpor přestupu tepla — interiér [m²K/W]
-var Rse = 0.04;          // Odpor přestupu tepla — exteriér [m²K/W]
-var T_INT = 21;           // Návrhová vnitřní teplota [°C]
-var T_EXT = -15;          // Návrhová venkovní teplota [°C]
-var RH_INT = 55;          // Relativní vlhkost interiéru [%]
-
-// Hustoty materiálů [kg/m³]
-var DENSITY = { brick:750, eps:15, wool:100, tiPlaster:600, adhesive:1400, default:1600 };
-
-// Fázový posun [h/50mm]
-var PHASE = { brick:1.0, insul:0.7, default:0.3 };
-
-// Difúzní odpor μ [-]
-var MU = { brick:10, eps:30, wool:1, tiPlaster:8, adhesive:20, default:10 };
-
-// SVG rozměry
-var SVG_W = 900, SVG_H = 640, ZOOM_STEP = 1.15, ZOOM_MAX = 3, MIN_LAYER_W = 18;
-
-// ČSN normy
-var U_CSN = 0.25, U_PASSIVE = 0.18;
-
-// ═══ VÝKON ═══
-var _debounceTimer;
-function debounceRender(fn, delay){
-  clearTimeout(_debounceTimer);
-  _debounceTimer = setTimeout(fn, delay || 60);
-}
-
-// ═══ STAV APLIKACE ═══
+/* ===== STATE ===== */
 var curVar='A', insulType='eps', insulThick=150;
 
-// ═══ DEFINICE VRSTEV ═══
+/* ===== LAYER DEFINITIONS ===== */
 /* Var A: vnitřní omítka | lepidlo+perlinka interiér | cihla | TI jádrová omítka | penetrace | silikátová omítka */
 var layersA=[
 {n:'Vnitřní omítka',t:15,l:0.88,d:'Vápenocementová štuková omítka\nVyrovnávací a ochranná vrstva\ntl. 10–15 mm\nHladká povrchová úprava',fill:'#c8baa8',plaster:'inner'},
@@ -197,86 +130,71 @@ return [
 {n:'Silikátová omítka',t:2,l:0.70,d:'Finální povrchová úprava 1,5–2 mm\nProbarvená, zrnitost 1,5 mm\nSilikátová / silikonová báze\nOdolná povětrnosti',fill:'#d4a055',plaster:'outer'}
 ];}
 
-// ═══ POMOCNÉ FUNKCE ═══
-/** Vrátí hustotu materiálu [kg/m³] dle typu vrstvy */
-function getDensity(L){
-  if(L.brick) return DENSITY.brick;
-  if(L.insul) return DENSITY.eps;
-  if(L.wool) return DENSITY.wool;
-  if(L.tiPlaster) return DENSITY.tiPlaster;
-  if(L.adhesive||L.mesh||L.meshInterior) return DENSITY.adhesive;
-  return DENSITY.default;
-}
-/** Vrátí difúzní odpor μ [-] dle typu vrstvy */
-function getMu(L){
-  if(L.brick) return MU.brick;
-  if(L.insul) return MU.eps;
-  if(L.wool) return MU.wool;
-  if(L.adhesive||L.mesh||L.meshInterior) return MU.adhesive;
-  if(L.tiPlaster) return MU.tiPlaster;
-  if(L.plaster==='outer') return 20;
-  if(L.plaster==='inner') return MU.default;
-  return MU.default;
-}
-/** Vypočítá procentuální podíl R-hodnoty vrstvy na celku */
-function calcRPct(L, layers){
-  var Rtot=Rsi+Rse;
-  for(var i=0;i<layers.length;i++) Rtot+=(layers[i].t/1000)/layers[i].l;
-  if(Rtot===0) return 0;
-  return ((L.t/1000)/L.l)/Rtot*100;
-}
-/** Celková tloušťka skladby [mm] */
-function calcTotalThickness(layers){
-  var t=0;for(var i=0;i<layers.length;i++)t+=layers[i].t;return t;
-}
-
-// ═══ VÝPOČTY ═══
 function calcU(layers){
-var R=Rsi+Rse;
+var R=0.13+0.04;
 for(var i=0;i<layers.length;i++)R+=(layers[i].t/1000)/layers[i].l;
 return 1/R;
 }
 
 function phaseShift(layers){
-/* Fázový posun: ~1h/50mm cihla, ~0.7h/50mm izolace, ~0.3h/50mm ostatní */
-var h=0;for(var i=0;i<layers.length;i++){var L=layers[i];if(L.brick)h+=L.t/50*PHASE.brick;else if(L.insul||L.wool)h+=L.t/50*PHASE.insul;else h+=L.t/50*PHASE.default;}return Math.round(h);
+/* simplified: ~1h per 50mm heavy material + 0.7h per 50mm insulation */
+var h=0;for(var i=0;i<layers.length;i++){var L=layers[i];if(L.brick)h+=L.t/50*1.0;else if(L.insul||L.wool)h+=L.t/50*0.7;else h+=L.t/50*0.3;}return Math.round(h);
 }
 
-// ═══ DYNAMICKÉ VÝPOČTY ═══
-/* Sd difúzní tloušťka [m] — ČSN 73 0540-4 */
+/* ===== DYNAMIC CALCULATIONS ===== */
+/* Sd diffusion thickness [m] */
 function calcSd(layers){
   var sd=0;
   for(var i=0;i<layers.length;i++){
-    sd+=layers[i].t/1000*getMu(layers[i]);
+    var L=layers[i],mu=5;
+    if(L.brick)mu=10;
+    else if(L.insul)mu=30; /* EPS */
+    else if(L.wool)mu=1;
+    else if(L.adhesive||L.mesh||L.meshInterior)mu=15;
+    else if(L.tiPlaster)mu=8;
+    else if(L.plaster==='outer')mu=20;
+    else if(L.plaster==='inner')mu=10;
+    else mu=10;
+    sd+=L.t/1000*mu;
   }
   return sd;
 }
-/* Akustická neprůzvučnost Rw [dB] — zjednodušený hmotnostní zákon */
+/* Acoustic Rw estimate [dB] — surface mass law approximation */
 function calcRw(layers){
-  var m=0; /* plošná hmotnost kg/m² */
+  var m=0; /* surface mass kg/m² */
   for(var i=0;i<layers.length;i++){
-    m+=getDensity(layers[i])*layers[i].t/1000;
+    var L=layers[i];
+    if(L.brick) m+=750*L.t/1000;
+    else if(L.insul) m+=15*L.t/1000;
+    else if(L.wool) m+=100*L.t/1000;
+    else if(L.tiPlaster) m+=600*L.t/1000;
+    else if(L.adhesive||L.mesh||L.meshInterior) m+=1400*L.t/1000;
+    else m+=1600*L.t/1000;
   }
-  /* Rw ≈ 20*log10(m) + 2 pro těžké stěny; ochrana proti log(0) */
-  m=Math.max(1,m);
+  /* simplified mass law: Rw ≈ 20*log10(m) + 2 for heavy walls */
   return Math.round(20*Math.log(m)/Math.log(10)+2);
 }
-/* Hmotnost stěny [kg/m²] */
+/* Wall weight [kg/m²] */
 function calcWeight(layers){
   var m=0;
   for(var i=0;i<layers.length;i++){
-    m+=getDensity(layers[i])*layers[i].t/1000;
+    var L=layers[i];
+    if(L.brick) m+=750*L.t/1000;
+    else if(L.insul) m+=15*L.t/1000;
+    else if(L.wool) m+=100*L.t/1000;
+    else if(L.tiPlaster) m+=600*L.t/1000;
+    else if(L.adhesive||L.mesh||L.meshInterior) m+=1400*L.t/1000;
+    else m+=1600*L.t/1000;
   }
   return Math.round(m);
 }
-/* Teplotní profil stěnou [pole {x_mm, T}] — ČSN 73 0540-2 */
+/* Temperature profile through wall [array of {x_mm, T}] */
 function tempProfile(layers, Ti, Te){
-  var R=[],Rtot=Rsi+Rse;
+  var R=[],Rtot=0.13+0.04;
   for(var i=0;i<layers.length;i++) R.push((layers[i].t/1000)/layers[i].l);
   for(var i=0;i<R.length;i++) Rtot+=R[i];
-  if(Rtot<=0) Rtot=0.001; /* ochrana proti dělení nulou */
-  var q=(Ti-Te)/Rtot; /* tepelný tok W/m² */
-  var pts=[],xmm=0,T=Ti-q*Rsi; /* po Rsi */
+  var q=(Ti-Te)/Rtot; /* heat flux W/m² */
+  var pts=[],xmm=0,T=Ti-q*0.13; /* after Rsi */
   pts.push({x:0,T:Ti});
   pts.push({x:0.1,T:T}); /* inner surface */
   for(var i=0;i<layers.length;i++){
@@ -301,192 +219,21 @@ function getDynVals(){
   var sdA=calcSd(lA), sdB=calcSd(lB);
   var rwA=calcRw(lA), rwB=calcRw(lB);
   var wA=calcWeight(lA), wB=calcWeight(lB);
-  var tA=calcTotalThickness(lA),tB=calcTotalThickness(lB);
+  var tA=0,tB=0;
+  for(var i=0;i<lA.length;i++)tA+=lA[i].t;
+  for(var i=0;i<lB.length;i++)tB+=lB[i].t;
   return {uA:uA,uB:uB,phA:phA,phB:phB,sdA:sdA,sdB:sdB,rwA:rwA,rwB:rwB,wA:wA,wB:wB,tA:tA,tB:tB,lA:lA,lB:lB};
 }
 
-// ═══ RENDEROVÁNÍ SVG ═══
-
-/** Generuje SVG <defs> s patterny pro materiály — realistická verze */
-function buildSVGPatterns(pSfx){
-var s='<defs>';
-
-/* ── EPS expanded polystyrene — dense bead packing with highlights ── */
-s+='<pattern id="eps'+pSfx+'" width="30" height="30" patternUnits="userSpaceOnUse">';
-s+='<rect width="30" height="30" fill="#f4f4f6"/>';
-var epsB=[{x:4,y:3,r:3.5},{x:13,y:2,r:4.2},{x:23,y:4,r:3.8},{x:8,y:10,r:4.8},{x:19,y:9,r:3.2},{x:28,y:11,r:3.0},{x:2,y:17,r:3.2},{x:14,y:17,r:4.5},{x:24,y:16,r:3.6},{x:6,y:24,r:4.0},{x:17,y:25,r:3.5},{x:27,y:24,r:4.2},{x:10,y:29,r:2.8},{x:21,y:1,r:2.5},{x:1,y:10,r:2.0},{x:11,y:6,r:2.2},{x:0,y:27,r:3.0},{x:22,y:12,r:2.0}];
-for(var ei=0;ei<epsB.length;ei++){var eb=epsB[ei];s+='<circle cx="'+eb.x+'" cy="'+eb.y+'" r="'+eb.r+'" fill="#eeeef2" stroke="#dddde0" stroke-width="0.35"/><circle cx="'+(eb.x-eb.r*0.22).toFixed(1)+'" cy="'+(eb.y-eb.r*0.22).toFixed(1)+'" r="'+(eb.r*0.4).toFixed(1)+'" fill="#f9f9fb" opacity="0.55"/>';}
-s+='</pattern>';
-
-/* ── MW minerální vata — dense fibrous texture ── */
-s+='<pattern id="mw'+pSfx+'" width="24" height="24" patternUnits="userSpaceOnUse">';
-s+='<rect width="24" height="24" fill="#d8c840"/>';
-for(var fi=0;fi<13;fi++){var fy=fi*1.9+0.4,amp=1.1+Math.sin(fi*1.7)*0.5,sw=(0.45+Math.sin(fi*0.9)*0.25).toFixed(2),op=(0.35+Math.cos(fi*1.3)*0.12).toFixed(2),clr=fi%3===0?'#bfa828':fi%3===1?'#c8b030':'#b09820';s+='<path d="M-2,'+fy.toFixed(1)+'Q3,'+(fy-amp).toFixed(1)+' 6,'+fy.toFixed(1)+'Q9,'+(fy+amp).toFixed(1)+' 12,'+fy.toFixed(1)+'Q15,'+(fy-amp).toFixed(1)+' 18,'+fy.toFixed(1)+'Q21,'+(fy+amp).toFixed(1)+' 24,'+fy.toFixed(1)+'Q27,'+(fy-amp).toFixed(1)+' 28,'+fy.toFixed(1)+'" fill="none" stroke="'+clr+'" stroke-width="'+sw+'" opacity="'+op+'"/>';}
-s+='</pattern>';
-
-/* ── TI jádrová omítka (perlitová) — perlit grains with highlights ── */
-s+='<pattern id="tiP'+pSfx+'" width="16" height="16" patternUnits="userSpaceOnUse">';
-s+='<rect width="16" height="16" fill="#dac898"/>';
-var pG=[{x:3,y:3,r:2.2},{x:10,y:2,r:1.6},{x:14,y:5,r:1.8},{x:6,y:8,r:2.5},{x:12,y:9,r:1.4},{x:1,y:11,r:1.9},{x:8,y:14,r:2.0},{x:14,y:13,r:1.5},{x:4,y:15,r:1.3}];
-for(var pi=0;pi<pG.length;pi++){var pg=pG[pi];s+='<circle cx="'+pg.x+'" cy="'+pg.y+'" r="'+pg.r+'" fill="#f0e8d0" opacity="0.7"/><circle cx="'+(pg.x-pg.r*0.2).toFixed(1)+'" cy="'+(pg.y-pg.r*0.2).toFixed(1)+'" r="'+(pg.r*0.35).toFixed(1)+'" fill="#f8f0e0" opacity="0.5"/>';}
-s+='</pattern>';
-
-/* ── Perlinka (sklotextilní síťovina) ── */
-s+='<pattern id="perlinka'+pSfx+'" width="8" height="8" patternUnits="userSpaceOnUse">';
-s+='<rect width="8" height="8" fill="#d5cab2"/>';
-s+='<line x1="0" y1="2" x2="8" y2="2" stroke="#e8a020" stroke-width="0.9" opacity="0.75"/>';
-s+='<line x1="0" y1="6" x2="8" y2="6" stroke="#e8a020" stroke-width="0.9" opacity="0.75"/>';
-s+='<line x1="2" y1="0" x2="2" y2="8" stroke="#e8a020" stroke-width="0.9" opacity="0.75"/>';
-s+='<line x1="6" y1="0" x2="6" y2="8" stroke="#e8a020" stroke-width="0.9" opacity="0.75"/>';
-s+='<circle cx="2" cy="2" r="0.9" fill="#d08010" opacity="0.55"/><circle cx="6" cy="2" r="0.9" fill="#d08010" opacity="0.55"/>';
-s+='<circle cx="2" cy="6" r="0.9" fill="#d08010" opacity="0.55"/><circle cx="6" cy="6" r="0.9" fill="#d08010" opacity="0.55"/>';
-s+='</pattern>';
-
-/* ── Lepidlo ETICS ── */
-s+='<pattern id="combAdh'+pSfx+'" width="10" height="8" patternUnits="userSpaceOnUse">';
-s+='<rect width="10" height="8" fill="#a89880"/>';
-s+='<rect width="10" height="8" fill="#b8a890" opacity="0.4"/>';
-s+='<rect x="0" y="0" width="10" height="3" rx="0.5" fill="#9a8a70" opacity="0.6"/>';
-s+='<rect x="0" y="5" width="10" height="3" rx="0.5" fill="#9a8a70" opacity="0.6"/>';
-s+='<circle cx="3" cy="1.5" r="0.4" fill="#888" opacity="0.3"/>';
-s+='<circle cx="7" cy="6" r="0.5" fill="#888" opacity="0.25"/>';
-s+='</pattern>';
-
-/* ── Silikátová omítka — fine grain texture ── */
-s+='<pattern id="plasterGrain'+pSfx+'" width="12" height="12" patternUnits="userSpaceOnUse">';
-s+='<rect width="12" height="12" fill="#d4a055"/>';
-var grns=[{x:1.5,y:1.5,r:1.1},{x:5,y:2,r:0.8},{x:9,y:1,r:1.3},{x:3,y:5,r:0.9},{x:7,y:4.5,r:1.4},{x:11,y:5,r:0.7},{x:1,y:8,r:1.0},{x:5,y:9,r:1.2},{x:9,y:8.5,r:0.9},{x:3,y:11,r:0.7},{x:7,y:11,r:1.1},{x:11,y:10,r:0.8}];
-for(var gi=0;gi<grns.length;gi++){s+='<circle cx="'+grns[gi].x+'" cy="'+grns[gi].y+'" r="'+grns[gi].r+'" fill="#c89040" opacity="'+(0.3+Math.sin(gi)*0.12).toFixed(2)+'"/>';}
-s+='<line x1="0" y1="6" x2="12" y2="6.2" stroke="#b88030" stroke-width="0.25" opacity="0.3"/>';
-s+='</pattern>';
-
-/* ── Penetrace ── */
-s+='<pattern id="penWash'+pSfx+'" width="12" height="16" patternUnits="userSpaceOnUse">';
-s+='<rect width="12" height="16" fill="#ddd0b0"/>';
-s+='<line x1="2" y1="0" x2="2" y2="16" stroke="#ccc0a0" stroke-width="0.5" opacity="0.5"/>';
-s+='<line x1="5" y1="0" x2="5" y2="16" stroke="#ccc0a0" stroke-width="0.4" opacity="0.4"/>';
-s+='<line x1="8" y1="0" x2="8" y2="16" stroke="#ccc0a0" stroke-width="0.6" opacity="0.45"/>';
-s+='<line x1="11" y1="0" x2="11" y2="16" stroke="#ccc0a0" stroke-width="0.3" opacity="0.4"/>';
-s+='<ellipse cx="6" cy="8" rx="1.5" ry="2.5" fill="#c8b898" opacity="0.25"/>';
-s+='</pattern>';
-
-/* ── Vnitřní omítka — smooth trowel finish ── */
-s+='<pattern id="innerPlast'+pSfx+'" width="10" height="10" patternUnits="userSpaceOnUse">';
-s+='<rect width="10" height="10" fill="#c8baa8"/>';
-s+='<path d="M0,3Q5,2.2 10,3" fill="none" stroke="#bfb09c" stroke-width="0.4" opacity="0.4"/>';
-s+='<path d="M0,7Q4,7.8 10,7" fill="none" stroke="#bfb09c" stroke-width="0.3" opacity="0.35"/>';
-s+='<circle cx="3" cy="5" r="0.6" fill="#d0c4b4" opacity="0.25"/><circle cx="8" cy="2" r="0.4" fill="#d0c4b4" opacity="0.2"/>';
-s+='</pattern>';
-
-/* ── Brick surface grain (speckled terracotta) ── */
-s+='<pattern id="brickGrain'+pSfx+'" width="20" height="20" patternUnits="userSpaceOnUse">';
-s+='<rect width="20" height="20" fill="transparent"/>';
-var bSp=[{x:2,y:3},{x:7,y:1},{x:13,y:4},{x:18,y:2},{x:4,y:8},{x:10,y:7},{x:16,y:9},{x:1,y:13},{x:6,y:15},{x:12,y:12},{x:17,y:14},{x:3,y:18},{x:9,y:19},{x:14,y:17},{x:19,y:18}];
-for(var bi2=0;bi2<bSp.length;bi2++){var bsp=bSp[bi2];s+='<circle cx="'+bsp.x+'" cy="'+bsp.y+'" r="'+(0.3+bi2%3*0.25).toFixed(1)+'" fill="'+(bi2%2===0?'#8a4020':'#d4956a')+'" opacity="'+(0.08+bi2%4*0.04).toFixed(2)+'"/>';}
-s+='</pattern>';
-
-/* ── Cross-section hatching for brick (masonry standard) ── */
-s+='<pattern id="brickHatch'+pSfx+'" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">';
-s+='<rect width="6" height="6" fill="transparent"/>';
-s+='<line x1="0" y1="0" x2="0" y2="6" stroke="rgba(100,50,20,0.12)" stroke-width="0.7"/>';
-s+='</pattern>';
-
-/* ── Layer boundary shadow gradients ── */
-s+='<linearGradient id="layerShadL'+pSfx+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(0,0,0,0.18)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/></linearGradient>';
-s+='<linearGradient id="layerHighR'+pSfx+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(255,255,255,0.06)"/></linearGradient>';
-
-/* ── Brick depth gradient (top-bottom 3D) ── */
-s+='<linearGradient id="brickDepth'+pSfx+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(255,240,220,0.08)"/><stop offset="40%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.06)"/></linearGradient>';
-
-/* ── Cavity inner shadow gradient ── */
-s+='<linearGradient id="cavShadow'+pSfx+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,0,0,0.3)"/><stop offset="30%" stop-color="rgba(0,0,0,0.05)"/><stop offset="100%" stop-color="rgba(150,100,50,0.08)"/></linearGradient>';
-
-s+='</defs>';
-return s;
-}
-
-/** Generuje SVG indikátory (U-hodnota, fázový posun, tloušťka, ČSN, R-legenda) */
-function buildSVGIndicators(variant, uVal, phase, totalT, x, topY, vc, layers){
-var s='';
-var passiveOk=uVal<=U_PASSIVE;
-var indX=x+40, indY=topY+10;
-s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="52" rx="8" fill="#fff" stroke="'+vc+'" stroke-width="1.5" opacity="0.95"/>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+16)+'" text-anchor="middle" font-size="9" fill="#888" font-weight="600">U-hodnota</text>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+36)+'" text-anchor="middle" font-size="20" fill="'+(passiveOk?'#1e8449':'#c0392b')+'" font-weight="800">'+uVal.toFixed(2).replace('.',',')+'</text>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+47)+'" text-anchor="middle" font-size="8" fill="#aaa">W/(m²·K)</text>';
-indY+=58;
-s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="28" rx="6" fill="'+(passiveOk?'#eafaf1':'#fef5ec')+'" stroke="'+(passiveOk?'#27ae60':'#e67e22')+'" stroke-width="1" opacity="0.95"/>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+18)+'" text-anchor="middle" font-size="10" fill="'+(passiveOk?'#1e8449':'#c0392b')+'" font-weight="700">'+(passiveOk?'✅ Pasivní ≤ '+U_PASSIVE.toFixed(2).replace('.',','):'❌ Nesplní pasiv.')+'</text>';
-indY+=34;
-s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="48" rx="8" fill="#fff" stroke="#7f8c8d" stroke-width="1" opacity="0.95"/>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+15)+'" text-anchor="middle" font-size="9" fill="#888" font-weight="600">Fázový posun</text>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+34)+'" text-anchor="middle" font-size="18" fill="#2c3e50" font-weight="800">~'+phase+' h</text>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+44)+'" text-anchor="middle" font-size="8" fill="#aaa">'+(phase>=18?'výborný':'dostatečný')+'</text>';
-indY+=54;
-s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="42" rx="8" fill="#fff" stroke="'+vc+'" stroke-width="1" opacity="0.95"/>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+15)+'" text-anchor="middle" font-size="9" fill="#888" font-weight="600">Celkem tloušťka</text>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+34)+'" text-anchor="middle" font-size="16" fill="'+vc+'" font-weight="800">'+totalT+' mm</text>';
-indY+=48;
-s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="28" rx="6" fill="#ebf5fb" stroke="#5dade2" stroke-width="1" opacity="0.95"/>';
-var csnOk=uVal<=U_CSN;
-s+='<text x="'+(indX+52)+'" y="'+(indY+18)+'" text-anchor="middle" font-size="9" fill="'+(csnOk?'#2471a3':'#c0392b')+'" font-weight="600">'+(csnOk?'✅':'❌')+' ČSN ≤ '+U_CSN.toFixed(2).replace('.',',')+' W/m²K</text>';
-indY+=34;
-s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="36" rx="6" fill="#fff" stroke="#ccc" stroke-width="0.8" opacity="0.95"/>';
-s+='<text x="'+(indX+52)+'" y="'+(indY+12)+'" text-anchor="middle" font-size="7.5" fill="#888" font-weight="600">Příspěvek k izolaci</text>';
-s+='<defs><linearGradient id="rLegGrad'+variant+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#eee"/><stop offset="50%" stop-color="'+(variant==='A'?'rgba(255,200,80,0.6)':'rgba(100,200,150,0.6)')+'"/><stop offset="100%" stop-color="'+(variant==='A'?'rgba(220,160,40,0.8)':'rgba(50,180,100,0.8)')+'"/></linearGradient></defs>';
-s+='<rect x="'+(indX+8)+'" y="'+(indY+17)+'" width="89" height="6" rx="3" fill="url(#rLegGrad'+variant+')"/>';
-s+='<text x="'+(indX+8)+'" y="'+(indY+32)+'" font-size="6.5" fill="#aaa">slabý</text>';
-s+='<text x="'+(indX+97)+'" y="'+(indY+32)+'" text-anchor="end" font-size="6.5" fill="#aaa">silný</text>';
-return s;
-}
-
-/** Generuje callout detail ETICS vrstev (Var B) */
-function buildSVGCallouts(layers, variant, visW, startX, topY, wallH, x, pSfx){
-if(variant!=='B' || layers.length<=5) return '';
-var s='';
-var thinStartX=startX;for(var ci2=0;ci2<4;ci2++)thinStartX+=visW[ci2];
-var thinEndX=x;
-var callX=startX+20, callY=topY+wallH+140;
-s+='<line x1="'+thinStartX+'" y1="'+(topY+wallH+2)+'" x2="'+callX+'" y2="'+(callY+2)+'" stroke="#aaa" stroke-width="0.5" stroke-dasharray="3,2"/>';
-s+='<line x1="'+thinEndX+'" y1="'+(topY+wallH+2)+'" x2="'+(callX+320)+'" y2="'+(callY+2)+'" stroke="#aaa" stroke-width="0.5" stroke-dasharray="3,2"/>';
-s+='<text x="'+callX+'" y="'+(callY-2)+'" font-size="8.5" fill="#777" font-weight="700">🔍 Detail vnějších vrstev ETICS (zvětšeno):</text>';
-var detailLayers=[
-{n:layers[3].n,t:''+layers[3].t,desc:(insulType==='eps'?'λ=0,039':'λ=0,036')+' W/(m·K)',fill:layers[3].fill,pat:insulType==='eps'?'eps':'mw',h:14,skip:true},
-{n:'Stěrka + sklotextilní perlinka',t:'3–4',desc:'Síťovina ≥ 160 g/m², vtlačena do stěrky',fill:'#d2c8b0',pat:'perlinka',h:34},
-{n:'Penetrační nátěr (grundování)',t:'~0,5',desc:'Sjednocuje savost, nanáší se válečkem',fill:'#ddd0b0',pat:'penWash',h:18},
-{n:'Silikátová omítka (finální)',t:'1,5–2',desc:'Probarvená, zrnitost 1,5 mm, paropropustná',fill:'#d4a055',pat:'plasterGrain',h:26}
-];
-var dx=callX, detH=55;
-for(var di=0;di<detailLayers.length;di++){
-var dL=detailLayers[di];
-var dW=dL.skip?16:58;
-if(dL.skip){
-s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" rx="2" fill="'+dL.fill+'" opacity="0.35"/>';
-if(dL.pat)s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" fill="url(#'+dL.pat+pSfx+')" opacity="0.35" rx="2"/>';
-s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+16)+'" text-anchor="middle" font-size="5.5" fill="#999" font-style="italic">'+dL.n+'</text>';
-s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+23)+'" text-anchor="middle" font-size="5.5" fill="#bbb">'+dL.t+' mm</text>';
-dx+=dW+3;continue;
-}
-s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" rx="3" fill="'+dL.fill+'"/>';
-if(dL.pat)s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" fill="url(#'+dL.pat+pSfx+')" opacity="0.85" rx="3"/>';
-s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" fill="none" stroke="#aaa" stroke-width="0.7" rx="3"/>';
-s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+14)+'" text-anchor="middle" font-size="7" fill="#555" font-weight="700">'+dL.n+'</text>';
-s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+22)+'" text-anchor="middle" font-size="6" fill="#888">'+dL.t+' mm</text>';
-s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+30)+'" text-anchor="middle" font-size="5.5" fill="#bbb">'+dL.desc+'</text>';
-dx+=dW+4;
-}
-s+='<rect x="'+(callX-3)+'" y="'+(callY+1)+'" width="'+(dx-callX+3)+'" height="'+(detH+6)+'" fill="none" stroke="#bbb" stroke-width="0.7" stroke-dasharray="4,2" rx="4"/>';
-return s;
-}
-
+/* ===== BUILD SVG ===== */
 function buildSVG(layers,variant){
-var W=SVG_W,H=SVG_H;
-var totalT=calcTotalThickness(layers);
+var W=900,H=640;
+var totalT=0;for(var i=0;i<layers.length;i++)totalT+=layers[i].t;
 var drawW=540,scale=drawW/totalT,startX=140,topY=55,wallH=300;
 var vc=variant==='A'?'#d35400':'#1e8449';
 
-/* Vizuální šířky — minimální šířka pro tenké vrstvy */
-var minW=MIN_LAYER_W;
+/* compute visual widths — enforce generous minimum for thin layers */
+var minW=18; /* 18px minimum — enough to see texture & label */
 var rawWidths=[],totalRaw=0;
 for(var i=0;i<layers.length;i++){var rw=layers[i].t*scale;rawWidths.push(rw);totalRaw+=rw;}
 var visW=[],extraUsed=0;
@@ -499,8 +246,107 @@ var maxIdx=0;for(var i=1;i<visW.length;i++){if(visW[i]>visW[maxIdx])maxIdx=i;}
 visW[maxIdx]-=extraUsed;
 
 var s='<svg id="crossSvg'+variant+'" class="crossSvg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" style="width:100%;height:500px;user-select:none;display:block;will-change:transform;transform-origin:0 0" xmlns="http://www.w3.org/2000/svg">';
-var pSfx=variant;
-s+=buildSVGPatterns(pSfx);
+s+='<defs>';
+var pSfx=variant; /* pattern ID suffix for dual mode uniqueness */
+
+/* --- IMPROVED PATTERNS --- */
+
+/* EPS polystyren — sintered beads / granule texture */
+s+='<pattern id="eps'+pSfx+'" width="20" height="20" patternUnits="userSpaceOnUse">';
+s+='<rect width="20" height="20" fill="#f2f2f2"/>';
+s+='<circle cx="5" cy="4" r="3.8" fill="#eaeaea" stroke="#ddd" stroke-width="0.4"/>';
+s+='<circle cx="14" cy="5" r="4.2" fill="#e8e8e8" stroke="#ddd" stroke-width="0.4"/>';
+s+='<circle cx="3" cy="13" r="3.5" fill="#ebebeb" stroke="#ddd" stroke-width="0.3"/>';
+s+='<circle cx="10" cy="12" r="4.5" fill="#e6e6e6" stroke="#ddd" stroke-width="0.4"/>';
+s+='<circle cx="18" cy="15" r="3" fill="#ededed" stroke="#ddd" stroke-width="0.3"/>';
+s+='<circle cx="8" cy="19" r="2.8" fill="#e9e9e9" stroke="#ddd" stroke-width="0.3"/>';
+s+='<circle cx="17" cy="2" r="2.5" fill="#eeeeee" stroke="#ddd" stroke-width="0.3"/>';
+s+='</pattern>';
+
+/* MW minerální vata — wavy fiber bundles */
+s+='<pattern id="mw'+pSfx+'" width="16" height="14" patternUnits="userSpaceOnUse">';
+s+='<rect width="16" height="14" fill="#e2d460"/>';
+s+='<path d="M-2,2Q2,0 4,2Q6,4 8,2Q10,0 12,2Q14,4 18,2" fill="none" stroke="#c8b838" stroke-width="0.9" opacity="0.6"/>';
+s+='<path d="M-2,6Q1,4 4,6Q7,8 10,6Q13,4 16,6Q19,8 22,6" fill="none" stroke="#c8b838" stroke-width="1.0" opacity="0.55"/>';
+s+='<path d="M-2,10Q3,8 6,10Q9,12 12,10Q15,8 18,10" fill="none" stroke="#c8b838" stroke-width="0.8" opacity="0.5"/>';
+s+='<path d="M0,13Q4,11 8,13Q12,15 16,13" fill="none" stroke="#d0c040" stroke-width="0.5" opacity="0.4"/>';
+s+='</pattern>';
+
+/* TI jádrová omítka — perlitová, drobné kuličky perlitu v maltě */
+s+='<pattern id="tiP'+pSfx+'" width="12" height="12" patternUnits="userSpaceOnUse">';
+s+='<rect width="12" height="12" fill="#dac898"/>';
+s+='<circle cx="3" cy="3" r="1.8" fill="#eee0c0" opacity="0.7"/>';
+s+='<circle cx="9" cy="2" r="1.2" fill="#e8d8b0" opacity="0.6"/>';
+s+='<circle cx="6" cy="7" r="2.0" fill="#f0e4c8" opacity="0.6"/>';
+s+='<circle cx="11" cy="9" r="1.5" fill="#ece0c0" opacity="0.55"/>';
+s+='<circle cx="1" cy="10" r="1.0" fill="#e8dcc0" opacity="0.5"/>';
+s+='</pattern>';
+
+/* Perlinka — sklotextilní síťovina, viditelné mřížkování (4x4mm oko) */
+s+='<pattern id="perlinka'+pSfx+'" width="8" height="8" patternUnits="userSpaceOnUse">';
+s+='<rect width="8" height="8" fill="#d2c8b0"/>';
+/* stěrková hmota pod perlinkou */
+s+='<rect width="8" height="8" fill="#ddd2bc" opacity="0.5"/>';
+/* horizontální vlákna */
+s+='<line x1="0" y1="2" x2="8" y2="2" stroke="#e8a020" stroke-width="0.9" opacity="0.7"/>';
+s+='<line x1="0" y1="6" x2="8" y2="6" stroke="#e8a020" stroke-width="0.9" opacity="0.7"/>';
+/* vertikální vlákna */
+s+='<line x1="2" y1="0" x2="2" y2="8" stroke="#e8a020" stroke-width="0.9" opacity="0.7"/>';
+s+='<line x1="6" y1="0" x2="6" y2="8" stroke="#e8a020" stroke-width="0.9" opacity="0.7"/>';
+/* uzlové body */
+s+='<circle cx="2" cy="2" r="0.8" fill="#d08010" opacity="0.5"/>';
+s+='<circle cx="6" cy="2" r="0.8" fill="#d08010" opacity="0.5"/>';
+s+='<circle cx="2" cy="6" r="0.8" fill="#d08010" opacity="0.5"/>';
+s+='<circle cx="6" cy="6" r="0.8" fill="#d08010" opacity="0.5"/>';
+s+='</pattern>';
+
+/* Lepidlo ETICS — hřebenový zub, cementová hmota s viditelným zubem */
+s+='<pattern id="combAdh'+pSfx+'" width="10" height="8" patternUnits="userSpaceOnUse">';
+s+='<rect width="10" height="8" fill="#a89880"/>';
+/* cementová struktura */
+s+='<rect width="10" height="8" fill="#b8a890" opacity="0.4"/>';
+/* zuby hřebenového nanášení — vodorovné pruhy */
+s+='<rect x="0" y="0" width="10" height="3" rx="0.5" fill="#9a8a70" opacity="0.6"/>';
+s+='<rect x="0" y="5" width="10" height="3" rx="0.5" fill="#9a8a70" opacity="0.6"/>';
+/* drobný šedý písek v lepidle */
+s+='<circle cx="3" cy="1.5" r="0.4" fill="#888" opacity="0.3"/>';
+s+='<circle cx="7" cy="6" r="0.5" fill="#888" opacity="0.25"/>';
+s+='</pattern>';
+
+/* Silikátová omítka — drásaná/rýhovaná finální povrchová úprava */
+s+='<pattern id="plasterGrain'+pSfx+'" width="10" height="10" patternUnits="userSpaceOnUse">';
+s+='<rect width="10" height="10" fill="#d4a055"/>';
+/* zrnka kameniva */
+s+='<circle cx="2" cy="2" r="1.0" fill="#c89040" opacity="0.5"/>';
+s+='<circle cx="7" cy="4" r="1.3" fill="#c08838" opacity="0.45"/>';
+s+='<circle cx="4" cy="8" r="0.9" fill="#c89848" opacity="0.5"/>';
+s+='<circle cx="9" cy="9" r="0.7" fill="#c89040" opacity="0.4"/>';
+/* jemné drásání */
+s+='<line x1="0" y1="5" x2="10" y2="5" stroke="#b88030" stroke-width="0.3" opacity="0.35"/>';
+s+='</pattern>';
+
+/* Penetrace / grundování — tenká tekutá vrstva, stopy válečku */
+s+='<pattern id="penWash'+pSfx+'" width="12" height="16" patternUnits="userSpaceOnUse">';
+s+='<rect width="12" height="16" fill="#ddd0b0"/>';
+/* váleček — jemné svislé stopy */
+s+='<line x1="2" y1="0" x2="2" y2="16" stroke="#ccc0a0" stroke-width="0.5" opacity="0.5"/>';
+s+='<line x1="5" y1="0" x2="5" y2="16" stroke="#ccc0a0" stroke-width="0.4" opacity="0.4"/>';
+s+='<line x1="8" y1="0" x2="8" y2="16" stroke="#ccc0a0" stroke-width="0.6" opacity="0.45"/>';
+s+='<line x1="11" y1="0" x2="11" y2="16" stroke="#ccc0a0" stroke-width="0.3" opacity="0.4"/>';
+/* kapky/přetečení */
+s+='<ellipse cx="6" cy="8" rx="1.5" ry="2.5" fill="#c8b898" opacity="0.25"/>';
+s+='</pattern>';
+
+/* Vnitřní štuková omítka — hladká/hladká s jemnou strukturou */
+s+='<pattern id="innerPlast'+pSfx+'" width="8" height="8" patternUnits="userSpaceOnUse">';
+s+='<rect width="8" height="8" fill="#c8baa8"/>';
+/* jemné tahy hladítkem */
+s+='<path d="M0,4Q4,3 8,4" fill="none" stroke="#bfb09c" stroke-width="0.4" opacity="0.45"/>';
+s+='<path d="M0,7Q3,8 8,7" fill="none" stroke="#bfb09c" stroke-width="0.3" opacity="0.35"/>';
+s+='<circle cx="5" cy="2" r="0.5" fill="#d0c4b4" opacity="0.3"/>';
+s+='</pattern>';
+
+s+='</defs>';
 s+='<rect width="'+W+'" height="'+H+'" fill="#fdfcfa"/>';
 
 /* dashed alignment lines */
@@ -520,12 +366,12 @@ s+='<text x="12" y="36" font-size="9" fill="#999">Wienerberger Porotherm 44 Prof
 var x=startX;
 for(var li=0;li<layers.length;li++){
 var L=layers[li],w=visW[li],lx=x;
-s+='<g class="lyr" data-idx="'+li+'" tabindex="0" role="button" aria-label="'+L.n+' '+L.t+' mm" style="cursor:pointer">';
+s+='<g class="lyr" data-idx="'+li+'" style="cursor:pointer">';
 
 /* === BASE FILL === */
 s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="'+wallH+'" fill="'+(L.fill||'#ccc')+'"/>';
 
-/* === BRICK DETAIL — realistic cross-section === */
+/* === BRICK DETAIL === */
 if(L.brick){
 var courseH=62,mortarH=2,numCourses=Math.floor(wallH/(courseH+mortarH));
 var outerShell=10,webW=8,numRows=7,mmToPx=w/440;
@@ -534,26 +380,7 @@ var hScale=courseH/249,outerH=10,webH2=10,numVert=3;
 var chamberH2=(249-2*outerH-(numVert-1)*webH2)/numVert;
 for(var ci=0;ci<numCourses;ci++){
 var cy=topY+ci*(courseH+mortarH);
-/* Per-course color variation — natural terracotta */
-var hueShift=Math.sin(ci*2.3+0.5)*10;
-var bR=Math.round(193+hueShift),bG=Math.round(106+hueShift*0.35),bBl=Math.round(58+hueShift*0.25);
-var brickClr='rgb('+bR+','+bG+','+bBl+')';
-var cavDark='rgb('+Math.round(bR*0.35)+','+Math.round(bG*0.28)+','+Math.round(bBl*0.25)+')';
-var cavMid='rgb('+Math.round(bR*0.50)+','+Math.round(bG*0.40)+','+Math.round(bBl*0.35)+')';
-
-/* Brick base fill with color variation */
-s+='<rect x="'+lx+'" y="'+cy+'" width="'+w+'" height="'+courseH+'" fill="'+brickClr+'"/>';
-
-/* Surface grain texture */
-s+='<rect x="'+lx+'" y="'+cy+'" width="'+w+'" height="'+courseH+'" fill="url(#brickGrain'+pSfx+')" opacity="0.7"/>';
-
-/* Cross-section hatching on solid parts */
-s+='<rect x="'+lx+'" y="'+cy+'" width="'+w+'" height="'+courseH+'" fill="url(#brickHatch'+pSfx+')" opacity="0.8"/>';
-
-/* 3D depth gradient */
-s+='<rect x="'+lx+'" y="'+cy+'" width="'+w+'" height="'+courseH+'" fill="url(#brickDepth'+pSfx+')"/>';
-
-/* Cavities with 3D depth effect */
+s+='<rect x="'+lx+'" y="'+cy+'" width="'+w+'" height="'+courseH+'" fill="#c16a3a"/>';
 for(var r=0;r<numRows;r++){
 var cx1=lx+(outerShell+r*(chamberW+webW))*mmToPx;
 var cw=chamberW*mmToPx;
@@ -561,34 +388,16 @@ for(var v=0;v<numVert;v++){
 var cy1=cy+(outerH+v*(chamberH2+webH2))*hScale;
 var ch=chamberH2*hScale;
 if(cw>2&&ch>2){
-/* Cavity base — deep dark */
-s+='<rect x="'+cx1.toFixed(1)+'" y="'+cy1.toFixed(1)+'" width="'+cw.toFixed(1)+'" height="'+ch.toFixed(1)+'" rx="1.2" fill="'+cavDark+'" opacity="0.8"/>';
-/* Inner gradient for 3D depth */
-s+='<rect x="'+cx1.toFixed(1)+'" y="'+cy1.toFixed(1)+'" width="'+cw.toFixed(1)+'" height="'+ch.toFixed(1)+'" rx="1.2" fill="url(#cavShadow'+pSfx+')" opacity="0.9"/>';
-if(cw>4&&ch>4){
-/* Lighter center (depth illusion) */
-s+='<rect x="'+(cx1+1.2).toFixed(1)+'" y="'+(cy1+1.5).toFixed(1)+'" width="'+(cw-2.4).toFixed(1)+'" height="'+(ch-3).toFixed(1)+'" rx="0.6" fill="'+cavMid+'" opacity="0.2"/>';
-/* Subtle highlight at bottom edge */
-s+='<line x1="'+(cx1+1.5).toFixed(1)+'" y1="'+(cy1+ch-1.2).toFixed(1)+'" x2="'+(cx1+cw-1.5).toFixed(1)+'" y2="'+(cy1+ch-1.2).toFixed(1)+'" stroke="rgba(200,150,100,0.12)" stroke-width="0.6"/>';
-}
+s+='<rect x="'+cx1.toFixed(1)+'" y="'+cy1.toFixed(1)+'" width="'+cw.toFixed(1)+'" height="'+ch.toFixed(1)+'" rx="0.5" fill="#6b3018" opacity="0.65"/>';
+if(cw>4&&ch>4)s+='<rect x="'+(cx1+0.8).toFixed(1)+'" y="'+(cy1+0.8).toFixed(1)+'" width="'+(cw-1.6).toFixed(1)+'" height="'+(ch-1.6).toFixed(1)+'" rx="0.3" fill="#3a1508" opacity="0.3"/>';
 }}}
-
-/* PU foam mortar between courses */
 if(ci<numCourses-1){
-/* Base foam line */
-s+='<rect x="'+lx+'" y="'+(cy+courseH)+'" width="'+w+'" height="'+mortarH+'" fill="#f0d848" opacity="0.9" rx="0.3"/>';
-/* Foam texture — slight irregularity */
-s+='<rect x="'+lx+'" y="'+(cy+courseH)+'" width="'+w+'" height="'+mortarH+'" fill="rgba(220,190,50,0.3)" rx="0.3"/>';
-/* Foam squeeze-out hint */
-s+='<line x1="'+lx+'" y1="'+(cy+courseH+1)+'" x2="'+(lx+w)+'" y2="'+(cy+courseH+0.8)+'" stroke="#d8c030" stroke-width="0.4" opacity="0.5"/>';
+s+='<rect x="'+lx+'" y="'+(cy+courseH)+'" width="'+w+'" height="'+mortarH+'" fill="#e8c840" opacity="0.85"/>';
 if(ci===0)s+='<text x="'+(lx+w/2)+'" y="'+(cy+courseH+mortarH+9)+'" text-anchor="middle" font-size="7" fill="#8a7020" font-weight="600">PU pěna Dryfix tl. 1 mm</text>';
 }
-
-/* Course outline — subtle */
-s+='<rect x="'+lx+'" y="'+cy+'" width="'+w+'" height="'+courseH+'" fill="none" stroke="rgba(140,85,45,0.4)" stroke-width="0.5"/>';
+s+='<rect x="'+lx+'" y="'+cy+'" width="'+w+'" height="'+courseH+'" fill="none" stroke="#a0582e" stroke-width="0.5"/>';
 }
-/* Overall brick outline — strong border */
-s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="'+wallH+'" fill="none" stroke="#7a4a28" stroke-width="1.5"/>';
+s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="'+wallH+'" fill="none" stroke="#8B5E3C" stroke-width="1.2"/>';
 }
 
 /* === EPS / MW TEXTURE === */
@@ -684,8 +493,11 @@ s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="'+wallH+'" fill="url(#pl
 s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="20" fill="rgba(180,140,80,0.15)"/>';
 }
 
-/* === R-VALUE THERMAL OVERLAY === */
-var Rpct=calcRPct(L,layers);
+/* === R-VALUE THERMAL OVERLAY (feature 5) === */
+var Rtot_ov=0.13+0.04;
+for(var ri2=0;ri2<layers.length;ri2++) Rtot_ov+=(layers[ri2].t/1000)/layers[ri2].l;
+var Ri_layer=(L.t/1000)/L.l;
+var Rpct=Ri_layer/Rtot_ov*100;
 if(Rpct>=5 && !L.brick){
   var ovIntensity=Math.min(1,Rpct/60);
   var ovAlpha=(0.04+ovIntensity*0.10).toFixed(2);
@@ -693,19 +505,9 @@ if(Rpct>=5 && !L.brick){
   s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="'+wallH+'" fill="rgba('+ovClr+','+ovAlpha+')" rx="0"/>';
 }
 
-/* === LAYER BOUNDARY SHADOW (3D depth between layers) === */
-if(li>0 && !L.brick){
-var shadW=Math.min(8,w*0.18);
-s+='<rect x="'+lx+'" y="'+topY+'" width="'+shadW.toFixed(1)+'" height="'+wallH+'" fill="url(#layerShadL'+pSfx+')" opacity="0.8"/>';
-}
-if(li<layers.length-1 && !L.brick){
-var highW=Math.min(5,w*0.12);
-s+='<rect x="'+(lx+w-highW).toFixed(1)+'" y="'+topY+'" width="'+highW.toFixed(1)+'" height="'+wallH+'" fill="url(#layerHighR'+pSfx+')" opacity="0.6"/>';
-}
-
 /* === FRAME + HOVER === */
-var edgeW = L.brick ? 1.5 : (L.adhesive||L.mesh||L.meshInterior||L.penetrace ? 0.8 : 0.6);
-var edgeC = L.brick ? '#7a4a28' : (L.mesh||L.meshInterior ? '#c8a040' : (L.adhesive ? '#8a7a60' : (L.penetrace ? '#b0a080' : '#8a7a6a')));
+var edgeW = L.brick ? 1.2 : (L.adhesive||L.mesh||L.meshInterior||L.penetrace ? 0.8 : 0.6);
+var edgeC = L.brick ? '#8B5E3C' : (L.mesh||L.meshInterior ? '#c8a040' : (L.adhesive ? '#8a7a60' : (L.penetrace ? '#b0a080' : '#8a7a6a')));
 s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="'+wallH+'" fill="none" stroke="'+edgeC+'" stroke-width="'+edgeW+'"/>';
 s+='<rect x="'+lx+'" y="'+topY+'" width="'+w+'" height="'+wallH+'" fill="transparent" class="hov-rect"/>';
 s+='</g>';
@@ -721,8 +523,10 @@ else{
   s+='<text x="'+(lx+w/2)+'" y="'+(dimY+10)+'" text-anchor="middle" font-size="6" fill="#888" font-weight="600">'+L.t+'</text>';
 }
 
-/* === R-VALUE PERCENTAGE LABEL === */
-var Ri_pct=calcRPct(L,layers);
+/* === R-VALUE PERCENTAGE LABEL (feature 6) === */
+var Rtot_pct=0.13+0.04;
+for(var rp=0;rp<layers.length;rp++) Rtot_pct+=(layers[rp].t/1000)/layers[rp].l;
+var Ri_pct=((L.t/1000)/L.l)/Rtot_pct*100;
 if(Ri_pct>=1 && w>=12){
   var rpCol=Ri_pct>20?'#1e8449':(Ri_pct>10?'#666':'#aaa');
   var rpFs=Ri_pct>30?10:8;
@@ -738,17 +542,60 @@ var fs2=w>60?11:(w>30?10:(w>16?8:7));
 var shadow=L.brick?'text-shadow:0 1px 3px rgba(0,0,0,0.7)':'';
 s+='<text x="'+(lx+w/2)+'" y="'+lblY+'" text-anchor="middle" font-size="'+fs2+'" fill="'+lblCol+'" font-weight="700" transform="rotate(-90,'+(lx+w/2)+','+lblY+')" style="'+shadow+'">'+L.n+'</text>';
 }else if(w>=8){
-  /* narrow layer — abbreviated rotated label (zkrátí na celé slovo) */
-  var shortN=L.n;
-  if(shortN.length>12){var sp=shortN.lastIndexOf(' ',11);shortN=(sp>3?shortN.substring(0,sp):shortN.substring(0,11))+'…';}
+  /* narrow layer — abbreviated rotated label */
+  var shortN=L.n.length>12?L.n.substring(0,11)+'…':L.n;
   var lblY2=topY+wallH/2;
   s+='<text x="'+(lx+w/2)+'" y="'+lblY2+'" text-anchor="middle" font-size="6" fill="#555" font-weight="600" transform="rotate(-90,'+(lx+w/2)+','+lblY2+')">'+shortN+'</text>';
 }
 x+=w;
 }
 
-/* === CALLOUT ETICS === */
-s+=buildSVGCallouts(layers, variant, visW, startX, topY, wallH, x, pSfx);
+/* === CALLOUT for ETICS thin layers (Var B) — enhanced detail === */
+if(variant==='B' && layers.length>5){
+/* position the callout below the section */
+var thinStartX=startX;for(var ci2=0;ci2<4;ci2++)thinStartX+=visW[ci2]; /* up to insulation */
+var thinEndX=x;
+var callX=startX+20, callY=topY+wallH+140;
+
+/* zoom bracket — dashed lines from thin layers down to callout */
+s+='<line x1="'+thinStartX+'" y1="'+(topY+wallH+2)+'" x2="'+callX+'" y2="'+(callY+2)+'" stroke="#aaa" stroke-width="0.5" stroke-dasharray="3,2"/>';
+s+='<line x1="'+thinEndX+'" y1="'+(topY+wallH+2)+'" x2="'+(callX+320)+'" y2="'+(callY+2)+'" stroke="#aaa" stroke-width="0.5" stroke-dasharray="3,2"/>';
+
+s+='<text x="'+callX+'" y="'+(callY-2)+'" font-size="8.5" fill="#777" font-weight="700">🔍 Detail vnějších vrstev ETICS (zvětšeno):</text>';
+
+var detailLayers=[
+{n:layers[3].n,t:''+layers[3].t,desc:(insulType==='eps'?'λ=0,039':'λ=0,036')+' W/(m·K)',fill:layers[3].fill,pat:insulType==='eps'?'eps':'mw',h:14,skip:true},
+{n:'Stěrka + sklotextilní perlinka',t:'3–4',desc:'Síťovina ≥ 160 g/m², vtlačena do stěrky',fill:'#d2c8b0',pat:'perlinka',h:34},
+{n:'Penetrační nátěr (grundování)',t:'~0,5',desc:'Sjednocuje savost, nanáší se válečkem',fill:'#ddd0b0',pat:'penWash',h:18},
+{n:'Silikátová omítka (finální)',t:'1,5–2',desc:'Probarvená, zrnitost 1,5 mm, paropropustná',fill:'#d4a055',pat:'plasterGrain',h:26}
+];
+/* horizontal layout — detail layers shown left to right */
+var dx=callX, detH=55;
+for(var di=0;di<detailLayers.length;di++){
+var dL=detailLayers[di];
+var dW=dL.skip?16:58;
+if(dL.skip){
+/* compressed connector for insulation */
+s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" rx="2" fill="'+dL.fill+'" opacity="0.35"/>';
+if(dL.pat)s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" fill="url(#'+dL.pat+pSfx+')" opacity="0.35" rx="2"/>';
+s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+16)+'" text-anchor="middle" font-size="5.5" fill="#999" font-style="italic">'+dL.n+'</text>';
+s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+23)+'" text-anchor="middle" font-size="5.5" fill="#bbb">'+dL.t+' mm</text>';
+dx+=dW+3;
+continue;
+}
+/* filled detail rectangle with pattern */
+s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" rx="3" fill="'+dL.fill+'"/>';
+if(dL.pat)s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" fill="url(#'+dL.pat+pSfx+')" opacity="0.85" rx="3"/>';
+s+='<rect x="'+dx+'" y="'+(callY+4)+'" width="'+dW+'" height="'+detH+'" fill="none" stroke="#aaa" stroke-width="0.7" rx="3"/>';
+/* label below */
+s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+14)+'" text-anchor="middle" font-size="7" fill="#555" font-weight="700">'+dL.n+'</text>';
+s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+22)+'" text-anchor="middle" font-size="6" fill="#888">'+dL.t+' mm</text>';
+s+='<text x="'+(dx+dW/2)+'" y="'+(callY+detH+30)+'" text-anchor="middle" font-size="5.5" fill="#bbb">'+dL.desc+'</text>';
+dx+=dW+4;
+}
+/* outline frame */
+s+='<rect x="'+(callX-3)+'" y="'+(callY+1)+'" width="'+(dx-callX+3)+'" height="'+(detH+6)+'" fill="none" stroke="#bbb" stroke-width="0.7" stroke-dasharray="4,2" rx="4"/>';
+}
 
 /* total dimension */
 var totalDimY=topY+wallH+36;
@@ -767,8 +614,8 @@ s+='<line x1="'+(startX-8)+'" y1="'+ary+'" x2="'+(x+8)+'" y2="'+ary+'" stroke="#
 s+='<polygon points="'+(x+8)+','+(ary-3.5)+' '+(x+15)+','+ary+' '+(x+8)+','+(ary+3.5)+'" fill="#e74c3c" opacity="'+(arrowOp+0.1)+'"/>';
 }
 
-/* === TEPLOTNÍ PROFIL === */
-var Ti=T_INT, Te=T_EXT, RHi=RH_INT;
+/* === ENHANCED TEMPERATURE PROFILE (feature 2) === */
+var Ti=21, Te=-15, RHi=55;
 var tp=tempProfile(layers, Ti, Te);
 var dpT=dewPoint(Ti, RHi);
 var gradBarH=14; /* enlarged gradient bar */
@@ -855,7 +702,6 @@ var dpFound=false;
 var xAcc5=startX;
 for(var tli=0;tli<layers.length;tli++){
   var lW5=visW[tli];
-  if(tli+2>=tp.pts.length) break; /* bounds check */
   var T1=tp.pts[tli+1].T;
   var T2=tp.pts[tli+2].T;
 
@@ -874,12 +720,10 @@ for(var tli=0;tli<layers.length;tli++){
     s+='<circle cx="'+dpX.toFixed(1)+'" cy="'+(barY+7)+'" r="1.5" fill="#fff" opacity="0.6"/>';
     /* warning label */
     var warnX=dpX+10, warnY=barY-8;
-    s+='<g role="alert">';
     s+='<rect x="'+warnX+'" y="'+(warnY-10)+'" width="130" height="26" rx="5" fill="#fff" stroke="#e74c3c" stroke-width="1.5" opacity="0.95"/>';
     s+='<rect x="'+warnX+'" y="'+(warnY-10)+'" width="130" height="26" rx="5" fill="rgba(231,76,60,0.06)"/>';
     s+='<text x="'+(warnX+65)+'" y="'+(warnY-1)+'" text-anchor="middle" font-size="8" fill="#e74c3c" font-weight="800">⚠ RIZIKO KONDENZACE</text>';
     s+='<text x="'+(warnX+65)+'" y="'+(warnY+10)+'" text-anchor="middle" font-size="6.5" fill="#5dade2">rosný bod '+dpT.toFixed(1)+'°C · '+RHi+'% RH</text>';
-    s+='</g>';
   }
   xAcc5+=lW5;
 }
@@ -893,16 +737,53 @@ if(!dpFound){
 s+='<text x="'+(startX-5)+'" y="'+(barY+gradBarH/2+3)+'" text-anchor="end" font-size="9" fill="#c0392b" font-weight="700">'+Ti+'°C</text>';
 s+='<text x="'+(x+5)+'" y="'+(barY+gradBarH/2+3)+'" font-size="9" fill="#2471a3" font-weight="700">'+Te+'°C</text>';
 
-/* === INDIKÁTORY === */
+/* === KEY INDICATORS === */
 var uVal=calcU(layers);
 var phase=phaseShift(layers);
-s+=buildSVGIndicators(variant, uVal, phase, totalT, x, topY, vc, layers);
+var passiveOk=uVal<=0.18;
+var indX=x+40, indY=topY+10;
+
+s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="52" rx="8" fill="#fff" stroke="'+vc+'" stroke-width="1.5" opacity="0.95"/>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+16)+'" text-anchor="middle" font-size="9" fill="#888" font-weight="600">U-hodnota</text>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+36)+'" text-anchor="middle" font-size="20" fill="'+(passiveOk?'#1e8449':'#c0392b')+'" font-weight="800">'+uVal.toFixed(2).replace('.',',')+'</text>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+47)+'" text-anchor="middle" font-size="8" fill="#aaa">W/(m²·K)</text>';
+
+indY+=58;
+s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="28" rx="6" fill="'+(passiveOk?'#eafaf1':'#fef5ec')+'" stroke="'+(passiveOk?'#27ae60':'#e67e22')+'" stroke-width="1" opacity="0.95"/>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+18)+'" text-anchor="middle" font-size="10" fill="'+(passiveOk?'#1e8449':'#c0392b')+'" font-weight="700">'+(passiveOk?'✅ Pasivní ≤ 0,18':'❌ Nesplní pasiv.')+'</text>';
+
+indY+=34;
+s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="48" rx="8" fill="#fff" stroke="#7f8c8d" stroke-width="1" opacity="0.95"/>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+15)+'" text-anchor="middle" font-size="9" fill="#888" font-weight="600">Fázový posun</text>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+34)+'" text-anchor="middle" font-size="18" fill="#2c3e50" font-weight="800">~'+phase+' h</text>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+44)+'" text-anchor="middle" font-size="8" fill="#aaa">'+(phase>=18?'výborný':'dostatečný')+'</text>';
+
+indY+=54;
+s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="42" rx="8" fill="#fff" stroke="'+vc+'" stroke-width="1" opacity="0.95"/>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+15)+'" text-anchor="middle" font-size="9" fill="#888" font-weight="600">Celkem tloušťka</text>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+34)+'" text-anchor="middle" font-size="16" fill="'+vc+'" font-weight="800">'+totalT+' mm</text>';
+
+indY+=48;
+s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="28" rx="6" fill="#ebf5fb" stroke="#5dade2" stroke-width="1" opacity="0.95"/>';
+var csnOk=uVal<=0.25;
+s+='<text x="'+(indX+52)+'" y="'+(indY+18)+'" text-anchor="middle" font-size="9" fill="'+(csnOk?'#2471a3':'#c0392b')+'" font-weight="600">'+(csnOk?'✅':'❌')+' ČSN ≤ 0,25 W/m²K</text>';
+
+/* === R-VALUE LEGEND (feature 5) === */
+indY+=34;
+s+='<rect x="'+indX+'" y="'+indY+'" width="105" height="36" rx="6" fill="#fff" stroke="#ccc" stroke-width="0.8" opacity="0.95"/>';
+s+='<text x="'+(indX+52)+'" y="'+(indY+12)+'" text-anchor="middle" font-size="7.5" fill="#888" font-weight="600">Příspěvek k izolaci</text>';
+/* mini gradient bar */
+s+='<defs><linearGradient id="rLegGrad'+variant+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#eee"/><stop offset="50%" stop-color="'+(variant==='A'?'rgba(255,200,80,0.6)':'rgba(100,200,150,0.6)')+'"/><stop offset="100%" stop-color="'+(variant==='A'?'rgba(220,160,40,0.8)':'rgba(50,180,100,0.8)')+'"/></linearGradient></defs>';
+s+='<rect x="'+(indX+8)+'" y="'+(indY+17)+'" width="89" height="6" rx="3" fill="url(#rLegGrad'+variant+')"/>';
+s+='<text x="'+(indX+8)+'" y="'+(indY+32)+'" font-size="6.5" fill="#aaa">slabý</text>';
+s+='<text x="'+(indX+97)+'" y="'+(indY+32)+'" text-anchor="end" font-size="6.5" fill="#aaa">silný</text>';
 
 s+='</svg>';
 return s;
 }
 
-// ═══ ZOOM STAV ═══
+/* ===== ZOOM STATE (CSS transform) ===== */
+var SVG_W=900,SVG_H=640,ZOOM_MAX=3;
 var ZM={vx:0,vy:0,vw:SVG_W,vh:SVG_H};
 var dragState={active:false,sx:0,sy:0,svx:0,svy:0};
 
@@ -921,7 +802,7 @@ function clampPan(){
   ZM.vy=Math.max(0,Math.min(ZM.vy,SVG_H-ZM.vh));
 }
 
-// ═══ RENDER ═══
+/* ===== RENDER ===== */
 function render(){
 var layers=curVar==='A'?layersA:makeBLayers();
 var el=document.getElementById('svgMain');
@@ -935,66 +816,40 @@ el.classList.add('svg-transition');
 clampPan();
 applyZoom();
 
-/* Tooltip — event delegation (jeden listener na parent, žádné memory leaky) */
+/* tooltip setup */
 var wrap=document.getElementById('svgWrap');
 var tip=wrap.querySelector('.tip');
 if(!tip){tip=document.createElement('div');tip.className='tip';wrap.appendChild(tip);}
-wrap._layers=layers; /* aktuální vrstvy pro delegované eventy */
-var _cachedRect=null;
-function _invalidateRect(){_cachedRect=null;}
-if(!wrap._delegated){
-  wrap._delegated=true;
-  window.addEventListener('resize',_invalidateRect);
-  wrap.addEventListener('mouseenter',function(e){
-    var lyr=e.target.closest('.lyr');
-    if(!lyr)return;
-    var curLayers=wrap._layers||[];
-    var idx=parseInt(lyr.getAttribute('data-idx'));
-    if(isNaN(idx)||idx<0||idx>=curLayers.length)return;
-    var L2=curLayers[idx];
-    tip.innerHTML='<b>'+L2.n+'</b> — '+L2.t+' mm<br>λ = '+L2.l.toFixed(3).replace('.',',')+' W/(m·K)<br><small>'+(L2.d||'').replace(/\n/g,'<br>')+'</small>';
-    tip.classList.add('show');
-    var r2=lyr.querySelector('.hov-rect');
-    if(r2){r2.setAttribute('fill','rgba(255,255,255,0.08)');r2.setAttribute('stroke','#fff');r2.setAttribute('stroke-width','2');}
-  },true);
-  wrap.addEventListener('mousemove',function(e){
-    if(!tip.classList.contains('show'))return;
-    if(!_cachedRect) _cachedRect=wrap.getBoundingClientRect();
-    tip.style.left=Math.min(e.clientX-_cachedRect.left+14,_cachedRect.width-200)+'px';
-    tip.style.top=(e.clientY-_cachedRect.top-40)+'px';
-  });
-  wrap.addEventListener('mouseleave',function(e){
-    var lyr=e.target.closest('.lyr');
-    if(!lyr)return;
-    tip.classList.remove('show');
-    var r2=lyr.querySelector('.hov-rect');
-    if(r2){r2.setAttribute('fill','transparent');r2.setAttribute('stroke','none');}
-  },true);
-  /* Keyboard: focus/Enter na SVG vrstvě zobrazí tooltip */
-  wrap.addEventListener('focusin',function(e){
-    var lyr=e.target.closest('.lyr');
-    if(!lyr)return;
-    var curLayers=wrap._layers||[];
-    var idx=parseInt(lyr.getAttribute('data-idx'));
-    if(isNaN(idx)||idx<0||idx>=curLayers.length)return;
-    var L2=curLayers[idx];
-    tip.innerHTML='<b>'+L2.n+'</b> — '+L2.t+' mm<br>λ = '+L2.l.toFixed(3).replace('.',',')+' W/(m·K)<br><small>'+(L2.d||'').replace(/\n/g,'<br>')+'</small>';
-    tip.classList.add('show');
-    tip.style.left='50%';tip.style.top='10px';
-  });
-  wrap.addEventListener('focusout',function(e){
-    var lyr=e.target.closest('.lyr');
-    if(lyr) tip.classList.remove('show');
-  });
+var lyrs=el.querySelectorAll('.lyr');
+for(var i=0;i<lyrs.length;i++){
+(function(idx){
+lyrs[idx].addEventListener('mouseenter',function(){
+var L2=layers[idx];
+tip.innerHTML='<b>'+L2.n+'</b> — '+L2.t+' mm<br>λ = '+L2.l.toFixed(3).replace('.',',')+' W/(m·K)<br><small>'+(L2.d||'').replace(/\n/g,'<br>')+'</small>';
+tip.classList.add('show');
+var r2=this.querySelector('.hov-rect');
+if(r2){r2.setAttribute('fill','rgba(255,255,255,0.08)');r2.setAttribute('stroke','#fff');r2.setAttribute('stroke-width','2');}
+});
+lyrs[idx].addEventListener('mousemove',function(e){
+var rect=wrap.getBoundingClientRect();
+tip.style.left=Math.min(e.clientX-rect.left+14,rect.width-200)+'px';
+tip.style.top=(e.clientY-rect.top-40)+'px';
+});
+lyrs[idx].addEventListener('mouseleave',function(){
+tip.classList.remove('show');
+var r2=this.querySelector('.hov-rect');
+if(r2){r2.setAttribute('fill','transparent');r2.setAttribute('stroke','none');}
+});
+})(i);
 }
 updateBars(layers);
 }
 
-// ═══ ZOOM FUNKCE ═══
+/* ===== ZOOM FUNCTIONS ===== */
 function doZoom(factor,cx,cy){
   var wrap=document.getElementById('svgWrap');
   if(!wrap)return;
-  var wW=wrap.clientWidth,wH=wrap.clientHeight||500;
+  var wW=wrap.clientWidth,wH=500;
   var svgX=ZM.vx+cx/wW*ZM.vw,svgY=ZM.vy+cy/wH*ZM.vh;
   var newVW=ZM.vw/factor;
   newVW=Math.max(SVG_W/ZOOM_MAX,Math.min(newVW,SVG_W));
@@ -1007,7 +862,7 @@ function zoomIn(){var w=document.getElementById('svgWrap');if(w)doZoom(1.3,w.cli
 function zoomOut(){var w=document.getElementById('svgWrap');if(w)doZoom(1/1.3,w.clientWidth/2,250);}
 function zoomReset(){ZM.vx=0;ZM.vy=0;ZM.vw=SVG_W;ZM.vh=SVG_H;applyZoom();}
 
-// ═══ ZOOM EVENTY ═══
+/* ===== INIT ZOOM EVENTS (once) ===== */
 (function(){
 document.addEventListener('DOMContentLoaded',function(){
 var wr=document.getElementById('svgWrap');
@@ -1015,7 +870,7 @@ if(!wr)return;
 wr.addEventListener('wheel',function(e){
   e.preventDefault();
   var rect=wr.getBoundingClientRect();
-  doZoom(e.deltaY<0?ZOOM_STEP:(1/ZOOM_STEP),e.clientX-rect.left,e.clientY-rect.top);
+  doZoom(e.deltaY<0?1.15:(1/1.15),e.clientX-rect.left,e.clientY-rect.top);
 },{passive:false});
 wr.addEventListener('mousedown',function(e){
   if(ZM.vw>=SVG_W-1||e.button!==0)return;
@@ -1025,7 +880,7 @@ wr.addEventListener('mousedown',function(e){
 });
 document.addEventListener('mousemove',function(e){
   if(!dragState.active)return;
-  var wW=wr.clientWidth,wH=wr.clientHeight||500;
+  var wW=wr.clientWidth,wH=500;
   ZM.vx=dragState.svx-(e.clientX-dragState.sx)/wW*ZM.vw;
   ZM.vy=dragState.svy-(e.clientY-dragState.sy)/wH*ZM.vh;
   clampPan();applyZoom();
@@ -1039,13 +894,13 @@ wr.addEventListener('touchstart',function(e){
 wr.addEventListener('touchmove',function(e){
   e.preventDefault();
   if(e.touches.length===2&&pinchDist>0){var dx2=e.touches[0].clientX-e.touches[1].clientX;var dy2=e.touches[0].clientY-e.touches[1].clientY;var nd=Math.sqrt(dx2*dx2+dy2*dy2);var rect=wr.getBoundingClientRect();doZoom(nd/pinchDist,(e.touches[0].clientX+e.touches[1].clientX)/2-rect.left,(e.touches[0].clientY+e.touches[1].clientY)/2-rect.top);pinchDist=nd;}
-  else if(e.touches.length===1&&dragState.active){var wW=wr.clientWidth,wH=wr.clientHeight||500;ZM.vx=dragState.svx-(e.touches[0].clientX-dragState.sx)/wW*ZM.vw;ZM.vy=dragState.svy-(e.touches[0].clientY-dragState.sy)/wH*ZM.vh;clampPan();applyZoom();}
+  else if(e.touches.length===1&&dragState.active){var wW=wr.clientWidth,wH=500;ZM.vx=dragState.svx-(e.touches[0].clientX-dragState.sx)/wW*ZM.vw;ZM.vy=dragState.svy-(e.touches[0].clientY-dragState.sy)/wH*ZM.vh;clampPan();applyZoom();}
 },{passive:false});
 wr.addEventListener('touchend',function(){dragState.active=false;pinchDist=0;});
 });
 })();
 
-// ═══ OVLÁDACÍ PRVKY ═══
+/* ===== CONTROLS ===== */
 function setVar(v){
 curVar=v;
 document.getElementById('tabA').className='btn btn-s'+(v==='A'?' on':'');
@@ -1070,15 +925,15 @@ function setInsulThick(val){
 insulThick=val;
 document.getElementById('insulVal').textContent=val+' mm';
 syncInsulControls();
-debounceRender(render, 60);
+render();
 }
 /* Global insulation control — updates ALL sliders/buttons across sections */
 function syncInsulControls(){
   var btns=document.querySelectorAll('.inCtrl');
   for(var i=0;i<btns.length;i++){
-    var bType=btns[i].getAttribute('data-insul-type');
-    if(bType==='eps'){btns[i].className='btn btn-s inCtrl'+(insulType==='eps'?' on':'');btns[i].style.cssText='font-size:'+btns[i].style.fontSize+';padding:'+btns[i].style.padding+';'+(insulType==='eps'?'background:#1e8449;color:#fff;border-color:#1e8449':'');}
-    if(bType==='mw'){btns[i].className='btn btn-s inCtrl'+(insulType==='mw'?' on':'');btns[i].style.cssText='font-size:'+btns[i].style.fontSize+';padding:'+btns[i].style.padding+';'+(insulType==='mw'?'background:#1e8449;color:#fff;border-color:#1e8449':'');}
+    var txt=btns[i].textContent.trim();
+    if(txt==='EPS 70F'){btns[i].className='btn btn-s inCtrl'+(insulType==='eps'?' on':'');btns[i].style.cssText='font-size:'+btns[i].style.fontSize+';padding:'+btns[i].style.padding+';'+(insulType==='eps'?'background:#1e8449;color:#fff;border-color:#1e8449':'');}
+    if(txt==='Min. vata'){btns[i].className='btn btn-s inCtrl'+(insulType==='mw'?' on':'');btns[i].style.cssText='font-size:'+btns[i].style.fontSize+';padding:'+btns[i].style.padding+';'+(insulType==='mw'?'background:#1e8449;color:#fff;border-color:#1e8449':'');}
   }
   var sls=document.querySelectorAll('.insulSl');
   for(var i=0;i<sls.length;i++)sls[i].value=insulThick;
@@ -1107,7 +962,7 @@ function setInsulThickGlobal(val){
   document.getElementById('insulVal').textContent=val+' mm';
   document.getElementById('insulSlider').value=val;
   syncInsulControls();
-  debounceRender(render, 60);
+  render();
   var sec1=document.getElementById('sec1');
   if(sec1.classList.contains('on')) animateParams();
   var sec2=document.getElementById('sec2');
@@ -1116,7 +971,7 @@ function setInsulThickGlobal(val){
   if(sec3.classList.contains('on')) renderSummer();
 }
 
-// ═══ TLOUŠŤKOVÉ LIŠTY ═══
+/* ===== THICKNESS BARS ===== */
 function updateBars(layers){
 var el=document.getElementById('thkBars');
 var lA=layersA,lB=makeBLayers();
@@ -1229,20 +1084,17 @@ h+='</div>';
 el.innerHTML=h;
 }
 
-/* Resize handler — překreslí aktuální sekci */
-window.addEventListener('resize', function(){ debounceRender(render, 200); });
-
 /* initial render */
 render();
 
-// ═══ PARAMETRY ═══
+/* PARAMS — fully dynamic */
 var paramsRendered=false;
 function animateParams(){
 paramsRendered=false; /* always re-render */
 var el=document.getElementById('paramCards');
 var D=getDynVals();
 var uAStr=D.uA.toFixed(2).replace('.',','), uBStr=D.uB.toFixed(2).replace('.',',');
-var passA=D.uA<=U_PASSIVE, passB=D.uB<=U_PASSIVE;
+var passA=D.uA<=0.18, passB=D.uB<=0.18;
 var h='';
 
 /* 1. U-HODNOTA */
@@ -1416,25 +1268,23 @@ h+='<div class="val-box" style="background:#eafaf1;border:2px solid #1e8449;bord
 h+='<div style="font-size:11px;background:#ebf5fb;border-radius:8px;padding:8px;border:1px solid #aed6f1">💡 ČSN 73 0532 požaduje pro obvodovou stěnu min. Rw = 30 dB. ETICS mírně zvyšuje Rw díky dodatečné hmotě.</div></div>';
 
 el.innerHTML=h;
-requestAnimationFrame(function(){
-  requestAnimationFrame(function(){
-    var fills=document.querySelectorAll('.anim-fill[data-target]');for(var f2=0;f2<fills.length;f2++)fills[f2].style.width=fills[f2].getAttribute('data-target')+'%';
-    var bats=document.querySelectorAll('.battery-fill[data-fill]');for(var b2=0;b2<bats.length;b2++)bats[b2].style.height=bats[b2].getAttribute('data-fill')+'%';
-    var hands=document.querySelectorAll('.phase-hand[data-angle]');for(var h2=0;h2<hands.length;h2++)hands[h2].style.transform='rotate('+hands[h2].getAttribute('data-angle')+'deg)';
-    var counters=document.querySelectorAll('.count-up[data-target]');
-    for(var c2=0;c2<counters.length;c2++){(function(el2){var target=parseInt(el2.getAttribute('data-target'));var current=0;var step=Math.ceil(target/20);var iv=setInterval(function(){current+=step;if(current>=target){current=target;clearInterval(iv);}el2.textContent=current;},60);})(counters[c2]);}
-  });
-});
+setTimeout(function(){
+var fills=document.querySelectorAll('.anim-fill[data-target]');for(var f2=0;f2<fills.length;f2++)fills[f2].style.width=fills[f2].getAttribute('data-target')+'%';
+var bats=document.querySelectorAll('.battery-fill[data-fill]');for(var b2=0;b2<bats.length;b2++)bats[b2].style.height=bats[b2].getAttribute('data-fill')+'%';
+var hands=document.querySelectorAll('.phase-hand[data-angle]');for(var h2=0;h2<hands.length;h2++)hands[h2].style.transform='rotate('+hands[h2].getAttribute('data-angle')+'deg)';
+var counters=document.querySelectorAll('.count-up[data-target]');
+for(var c2=0;c2<counters.length;c2++){(function(el2){var target=parseInt(el2.getAttribute('data-target'));var current=0;var step=Math.ceil(target/20);var iv=setInterval(function(){current+=step;if(current>=target){current=target;clearInterval(iv);}el2.textContent=current;},60);})(counters[c2]);}
+},200);
 }
 
-// ═══ SROVNÁVACÍ TABULKA ═══
+/* COMPARE TABLE — dynamic */
 function renderCmpTable(){
 var D=getDynVals();
 var h='<div style="font-size:11px;color:#888;margin-bottom:12px">Dynamické dle nastavení: <b>'+insulType.toUpperCase()+' '+insulThick+' mm</b></div>';
 var rows=[
 {p:'U-hodnota',desc:'Nížší = lépe izoluje.',vA:D.uA.toFixed(2).replace('.',',')+' W/(m²K)',vB:D.uB.toFixed(2).replace('.',',')+' W/(m²K)',w:D.uB<D.uA?'B':'A'},
-{p:'Pasivní standard',desc:'U ≤ '+U_PASSIVE.toFixed(2).replace('.',',')+' pro pas. domy.',vA:(D.uA<=U_PASSIVE?'✅ Ano':'❌ Ne'),vB:(D.uB<=U_PASSIVE?'✅ Ano':'❌ Ne'),w:D.uB<=U_PASSIVE&&D.uA>U_PASSIVE?'B':(D.uA<=U_PASSIVE&&D.uB>U_PASSIVE?'A':'=')},
-{p:'ČSN 73 0540',desc:'Norma: U ≤ '+U_CSN.toFixed(2).replace('.',',')+'.', vA:(D.uA<=U_CSN?'✅':'❌')+' ≤'+U_CSN.toFixed(2).replace('.',','),vB:(D.uB<=U_CSN?'✅':'❌')+' ≤'+U_CSN.toFixed(2).replace('.',','),w:'='},
+{p:'Pasivní standard',desc:'U ≤ 0,18 pro pas. domy.',vA:(D.uA<=0.18?'✅ Ano':'❌ Ne'),vB:(D.uB<=0.18?'✅ Ano':'❌ Ne'),w:D.uB<=0.18&&D.uA>0.18?'B':(D.uA<=0.18&&D.uB>0.18?'A':'=')},
+{p:'ČSN 73 0540',desc:'Norma: U ≤ 0,25.',vA:(D.uA<=0.25?'✅':'❌')+' ≤0,25',vB:(D.uB<=0.25?'✅':'❌')+' ≤0,25',w:'='},
 {p:'Fázový posun',desc:'Zpoždění vedra. Ideál > 18 h.',vA:'~'+D.phA+' h',vB:'~'+D.phB+' h',w:D.phB>D.phA?'B':'A'},
 {p:'Akumulace',desc:'Více kg = stabilnější klima.',vA:D.wA+' kg/m²',vB:D.wB+' kg/m²',w:'B'},
 {p:'Difúzní odpor sd',desc:'Níže = lépe dýchá.',vA:'sd '+D.sdA.toFixed(1)+' m',vB:'sd '+D.sdB.toFixed(1)+' m',w:D.sdA<D.sdB?'A':'B'},
@@ -1477,7 +1327,7 @@ document.getElementById('cmpTable').innerHTML=h;
 }
 renderCmpTable();
 
-// ═══ LETNÍ KOMFORT ═══
+/* ===== SUMMER COMFORT — INTERACTIVE ===== */
 var summerState={tMax:38,tMin:18,hour:0,playing:false,interval:null};
 
 function renderSummer(){
@@ -1507,7 +1357,6 @@ var inMaxB=tMeanInB+inAmplB, inMinB=tMeanInB-inAmplB;
 /* animated 24h graph */
 var gW=Math.min(800,window.innerWidth-40),gH=280,gPad=45,gGw=gW-2*gPad,gGh=gH-65;
 var yMin=Math.min(s.tMin,inMinB)-2, yMax=s.tMax+2;
-var yRange=(yMax-yMin)||1; /* ochrana proti dělení nulou */
 
 var sv='<svg width="100%" height="'+gH+'" viewBox="0 0 '+gW+' '+gH+'" style="display:block">';
 sv+='<defs><linearGradient id="comfGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#27ae60" stop-opacity="0.15"/><stop offset="100%" stop-color="#27ae60" stop-opacity="0.05"/></linearGradient></defs>';
@@ -1516,7 +1365,7 @@ sv+='<rect x="'+gPad+'" y="20" width="'+gGw+'" height="'+gGh+'" fill="#fafaf5" r
 
 /* Y axis */
 for(var ty=Math.ceil(yMin);ty<=Math.floor(yMax);ty+=2){
-  var yy=20+gGh-(ty-yMin)/yRange*gGh;
+  var yy=20+gGh-(ty-yMin)/(yMax-yMin)*gGh;
   sv+='<line x1="'+gPad+'" y1="'+yy.toFixed(1)+'" x2="'+(gPad+gGw)+'" y2="'+yy.toFixed(1)+'" stroke="#eee" stroke-width="0.5"/>';
   sv+='<text x="'+(gPad-5)+'" y="'+(yy+3).toFixed(1)+'" text-anchor="end" font-size="9" fill="#aaa">'+ty+'°</text>';
 }
@@ -1528,8 +1377,8 @@ for(var xh=0;xh<=24;xh+=2){
 }
 
 /* comfort zone 20-26 */
-var czT=20+gGh-(26-yMin)/yRange*gGh;
-var czB=20+gGh-(20-yMin)/yRange*gGh;
+var czT=20+gGh-(26-yMin)/(yMax-yMin)*gGh;
+var czB=20+gGh-(20-yMin)/(yMax-yMin)*gGh;
 sv+='<rect x="'+gPad+'" y="'+czT.toFixed(1)+'" width="'+gGw+'" height="'+(czB-czT).toFixed(1)+'" fill="url(#comfGrad)" stroke="#27ae60" stroke-width="0.7" stroke-dasharray="6,3"/>';
 sv+='<text x="'+(gPad+gGw-5)+'" y="'+(czT+12).toFixed(1)+'" text-anchor="end" font-size="8" fill="#27ae60" font-weight="700">komfortní zóna 20–26 °C</text>';
 
@@ -1539,7 +1388,7 @@ for(var xi=0;xi<=120;xi++){
   var hr=xi*24/120;
   var outT=tMean+tAmpl*Math.sin((hr-6)/24*2*Math.PI);
   var px=gPad+hr/24*gGw;
-  var py=20+gGh-(outT-yMin)/yRange*gGh;
+  var py=20+gGh-(outT-yMin)/(yMax-yMin)*gGh;
   outPath+=(xi===0?'':' L')+px.toFixed(1)+','+py.toFixed(1);
   if(xi===0) outFill+=px.toFixed(1)+','+py.toFixed(1);
   else outFill+=' L'+px.toFixed(1)+','+py.toFixed(1);
@@ -1554,7 +1403,7 @@ for(var xi2=0;xi2<=120;xi2++){
   var hr2=xi2*24/120;
   var inTA=tMeanInA+inAmplA*Math.sin((hr2-6-D.phA)/24*2*Math.PI);
   var px2=gPad+hr2/24*gGw;
-  var py2=20+gGh-(inTA-yMin)/yRange*gGh;
+  var py2=20+gGh-(inTA-yMin)/(yMax-yMin)*gGh;
   pathA+=(xi2===0?'':' L')+px2.toFixed(1)+','+py2.toFixed(1);
 }
 sv+='<path d="'+pathA+'" fill="none" stroke="#d35400" stroke-width="2.5" stroke-dasharray="8,4"/>';
@@ -1565,7 +1414,7 @@ for(var xi3=0;xi3<=120;xi3++){
   var hr3=xi3*24/120;
   var inTB=tMeanInB+inAmplB*Math.sin((hr3-6-D.phB)/24*2*Math.PI);
   var px3=gPad+hr3/24*gGw;
-  var py3=20+gGh-(inTB-yMin)/yRange*gGh;
+  var py3=20+gGh-(inTB-yMin)/(yMax-yMin)*gGh;
   pathB+=(xi3===0?'':' L')+px3.toFixed(1)+','+py3.toFixed(1);
 }
 sv+='<path d="'+pathB+'" fill="none" stroke="#1e8449" stroke-width="3"/>';
@@ -1577,9 +1426,9 @@ sv+='<line x1="'+chx.toFixed(1)+'" y1="18" x2="'+chx.toFixed(1)+'" y2="'+(20+gGh
 var outNow=tMean+tAmpl*Math.sin((s.hour-6)/24*2*Math.PI);
 var inANow=tMeanInA+inAmplA*Math.sin((s.hour-6-D.phA)/24*2*Math.PI);
 var inBNow=tMeanInB+inAmplB*Math.sin((s.hour-6-D.phB)/24*2*Math.PI);
-var dotY_out=20+gGh-(outNow-yMin)/yRange*gGh;
-var dotY_A=20+gGh-(inANow-yMin)/yRange*gGh;
-var dotY_B=20+gGh-(inBNow-yMin)/yRange*gGh;
+var dotY_out=20+gGh-(outNow-yMin)/(yMax-yMin)*gGh;
+var dotY_A=20+gGh-(inANow-yMin)/(yMax-yMin)*gGh;
+var dotY_B=20+gGh-(inBNow-yMin)/(yMax-yMin)*gGh;
 sv+='<circle cx="'+chx.toFixed(1)+'" cy="'+dotY_out.toFixed(1)+'" r="5" fill="#e74c3c" stroke="#fff" stroke-width="2"/>';
 sv+='<circle cx="'+chx.toFixed(1)+'" cy="'+dotY_A.toFixed(1)+'" r="5" fill="#d35400" stroke="#fff" stroke-width="2"/>';
 sv+='<circle cx="'+chx.toFixed(1)+'" cy="'+dotY_B.toFixed(1)+'" r="5" fill="#1e8449" stroke="#fff" stroke-width="2"/>';
@@ -1637,39 +1486,33 @@ h+='</div>';
 document.getElementById('summerUI').innerHTML=h;
 }
 
-var _summerCycleCount=0;
 function toggleSummerPlay(){
 if(summerState.playing){
   summerState.playing=false;
-  if(summerState.interval){clearInterval(summerState.interval);summerState.interval=null;}
+  clearInterval(summerState.interval);
   renderSummer();
 } else {
   summerState.playing=true;
-  _summerCycleCount=0;
-  if(summerState.interval){clearInterval(summerState.interval);summerState.interval=null;} /* vždy clearInterval před novým */
   summerState.interval=setInterval(function(){
     summerState.hour+=0.25;
-    if(summerState.hour>=24){summerState.hour=0;_summerCycleCount++;}
-    /* auto-stop po 2 cyklech (48h) */
-    if(_summerCycleCount>=2){
-      summerState.playing=false;
-      clearInterval(summerState.interval);summerState.interval=null;
-    }
+    if(summerState.hour>=24) summerState.hour=0;
     renderSummer();
   },120);
   renderSummer();
 }
 }
 
-// ═══ KALKULAČKA ═══
+/* CALCULATOR */
 var calc={area:200,mode:'z',hlp:2,fuel:'gas',priceKwh:2.80,hdd:3500,discRate:3,dotace:500,priceGrowth:3,showDetail:false,inclPTH:true,leseni:180,presuny:45};
 function getInsulPrice(type,thick){return type==='eps'?Math.round(thick/100*80):Math.round(thick/100*200);}
 function getInsulLambda(type){return type==='eps'?0.039:0.036;}
 function calcUvalueA(){
+  var Rsi=0.13,Rse=0.04;
   var R=Rsi+0.015/0.88+0.004/0.80+0.440/0.111+0.030/0.09+0.001/0.70+0.002/0.70+Rse;
   return 1/R;
 }
 function calcUvalue(iType,iThick){
+  var Rsi=0.13,Rse=0.04;
   var R=Rsi+0.015/0.88+0.004/0.80+0.440/0.111+(iThick/1000)/getInsulLambda(iType)+0.004/0.80+0.001/0.70+0.002/0.70+Rse;
   return 1/R;
 }
@@ -1689,21 +1532,17 @@ function simplePayback(investDiff,annualSaving){ return annualSaving>0 ? investD
 /* NPV cumulative savings over years with discount rate + energy price growth */
 function npvPayback(investDiff,annualSaving,discRate,priceGrowth,maxYrs){
   if(annualSaving<=0) return {year:999,npv30:0,data:[]};
-  if(investDiff<=0) return {year:0,npv30:0,data:[]};
   var cum=0,yr=999,data=[];
   for(var y=1;y<=maxYrs;y++){
-    var savY=annualSaving*Math.pow(1+priceGrowth/100,y); /* úspora roste s cenou energie */
+    var savY=annualSaving*Math.pow(1+priceGrowth/100,y); /* saving grows with energy prices */
     var pv=savY/Math.pow(1+discRate/100,y);
     cum+=pv;
     data.push({y:y,cum:Math.round(cum),inv:Math.round(investDiff)});
-    if(cum>=investDiff && yr===999) yr=y; /* kumulativní PV úspor >= investice */
+    if(cum>=investDiff && yr===999) yr=y;
   }
   return {year:yr,npv30:Math.round(cum),data:data};
 }
-function fmt(n){
-  var s=n<0?'-':'';
-  return s+Math.abs(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ');
-}
+function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ');}
 
 function renderCalc(){
 var a=calc.area,m=calc.mode;
@@ -1716,7 +1555,8 @@ var lesB=Math.round(calc.leseni*a),presB=Math.round(calc.presuny*a);
 var workB=m==='s'?0:Math.round((m==='z'?560:739)*a),foodB=m==='s'?calc.hlp*36*350:0,toolB=m==='s'?6500:0,totB=matB+lesB+presB+workB+foodB+toolB;
 var uValB=calcUvalue(insulType,insulThick);
 var uStr=uValB.toFixed(2).replace('.',',');
-var passiveOk=uValB<=U_PASSIVE;
+var passiveOk=uValB<=0.18;
+var timeData={s:{A:{days:22,range:'5–7 týd.'},B:{days:36,range:'8–10 týd.'}},z:{A:{days:12,range:'3–4 týd.'},B:{days:18,range:'4–6 týd.'}},f:{A:{days:7,range:'2–3 týd.'},B:{days:10,range:'3–4 týd.'}}};
 
 var h='<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px">';
 h+='<div style="flex:1;min-width:180px"><label style="font-size:12px;font-weight:600;color:#555">Plocha fasády</label><input type="range" class="sl" min="80" max="400" step="10" value="'+a+'" oninput="calc.area=+this.value;renderCalc()"><div style="text-align:center;font-size:22px;font-weight:800;color:#0f1b2d">'+a+' m²</div></div>';
@@ -1746,97 +1586,29 @@ h+='</div></div>';
 h+='<div class="grid2" style="margin-bottom:14px">';
 var variants=[{v:'A',c:'#d35400',bg:'#fef5ec',lb:'Var. A — Omítka'+(calc.inclPTH?'':' (bez PTH)'),mat:matA,les:lesA,pres:presA,work:workA,food:foodA,tool:toolA,tot:totA},{v:'B',c:'#1e8449',bg:'#eafaf1',lb:'Var. B — '+(insulType==='eps'?'EPS':'MW')+' '+insulThick+'mm'+(calc.inclPTH?'':' (bez PTH)'),mat:matB,les:lesB,pres:presB,work:workB,food:foodB,tool:toolB,tot:totB}];
 for(var vi=0;vi<2;vi++){var d2=variants[vi];
-/* build line items array */
-var lines=[];
-lines.push({icon:'🧱',label:'Materiál',desc:calc.inclPTH?'zdivo + povrch':'povrchové úpravy',val:d2.mat});
-lines.push({icon:'🏗️',label:'Lešení',desc:'pronájem + montáž',val:d2.les});
-lines.push({icon:'🚚',label:'Přesuny hmot',desc:'doprava na stavbě',val:d2.pres});
-if(m==='s'){
-  lines.push({icon:'🍽️',label:'Stravování',desc:calc.hlp+' pomocník'+(calc.hlp>1?'ů/ůci':'')+'',val:d2.food});
-  lines.push({icon:'🔧',label:'Nářadí',desc:'pořízení / zapůjčení',val:d2.tool});
-} else {
-  lines.push({icon:'👷',label:'Práce',desc:m==='z'?'živnostník':'stavební firma',val:d2.work});
-}
-/* card */
-h+='<div class="cc" style="border-color:'+d2.c+';background:'+d2.bg+';padding:16px">';
-/* header with total on top */
-h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">';
-h+='<div><div style="font-size:14px;font-weight:700;color:'+d2.c+'">'+d2.lb+'</div>';
-h+='<div style="font-size:11px;color:#888;margin-top:2px">'+a+' m² fasády</div></div>';
-h+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+d2.c+';line-height:1">'+fmt(d2.tot)+' <span style="font-size:14px">Kč</span></div>';
-h+='<div style="font-size:13px;color:#888;font-weight:600;margin-top:2px">'+fmt(Math.round(d2.tot/(a||1)))+' Kč/m²</div></div>';
-h+='</div>';
-/* line items */
-h+='<div style="display:flex;flex-direction:column;gap:10px">';
-for(var li=0;li<lines.length;li++){
-  var ln=lines[li];
-  var pct=d2.tot>0?Math.round(ln.val/d2.tot*100):0;
-  var barW2=d2.tot>0?(ln.val/d2.tot*100):0;
-  h+='<div>';
-  h+='<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px">';
-  h+='<span style="font-size:13px;font-weight:600;color:#333">'+ln.icon+' '+ln.label+'<span style="font-weight:400;color:#999;font-size:11px;margin-left:6px">'+ln.desc+'</span></span>';
-  h+='<span style="font-size:14px;font-weight:700;color:#222;white-space:nowrap">'+fmt(ln.val)+' Kč</span>';
-  h+='</div>';
-  /* bar + percent */
-  h+='<div style="display:flex;align-items:center;gap:8px">';
-  h+='<div style="flex:1;height:8px;background:'+d2.c+'18;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+barW2.toFixed(1)+'%;background:'+d2.c+';border-radius:4px;transition:width 0.3s"></div></div>';
-  h+='<span style="font-size:11px;font-weight:700;color:'+d2.c+';min-width:36px;text-align:right">'+pct+' %</span>';
-  h+='</div>';
-  h+='</div>';
-}
-h+='</div>';
-/* total footer */
-h+='<div style="margin-top:14px;padding-top:12px;border-top:2px solid '+d2.c+'55">';
-h+='<div style="display:flex;justify-content:space-between;align-items:center">';
-h+='<div style="font-size:14px;font-weight:800;color:#333">CELKEM</div>';
-h+='<div style="font-size:28px;font-weight:800;color:'+d2.c+'">'+fmt(d2.tot)+' Kč</div>';
-h+='</div>';
-h+='<div style="display:flex;justify-content:space-between;margin-top:4px;font-size:12px;color:#888">';
-h+='<span>za '+a+' m²</span>';
-h+='<span style="font-weight:600">'+fmt(Math.round(d2.tot/(a||1)))+' Kč/m²</span>';
-h+='</div>';
-h+='</div>';
-h+='</div>';
-}
+h+='<div class="cc" style="border-color:'+d2.c+';background:'+d2.bg+'"><div style="font-size:13px;font-weight:700;color:'+d2.c+';margin-bottom:8px">'+d2.lb+'</div><div style="font-size:12px">';
+h+='<div style="display:flex;justify-content:space-between"><span>Materiál</span><b>'+fmt(d2.mat)+' Kč</b></div>';
+h+='<div style="display:flex;justify-content:space-between;color:#7d3c98"><span>🏗️ Lešení</span><b>'+fmt(d2.les)+' Kč</b></div>';
+h+='<div style="display:flex;justify-content:space-between;color:#7d3c98"><span>🚚 Přesuny hmot</span><b>'+fmt(d2.pres)+' Kč</b></div>';
+if(m==='s'){h+='<div style="display:flex;justify-content:space-between;color:#d35400"><span>Stravování ('+calc.hlp+' os.)</span><b>'+fmt(d2.food)+' Kč</b></div><div style="display:flex;justify-content:space-between;color:#7d3c98"><span>Nářadí</span><b>'+fmt(d2.tool)+' Kč</b></div>';}
+else{h+='<div style="display:flex;justify-content:space-between"><span>Práce</span><b>'+fmt(d2.work)+' Kč</b></div>';}
+h+='</div><div style="margin-top:8px;padding-top:8px;border-top:1px solid '+d2.c+'44;display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:13px;font-weight:700">CELKEM</span><span style="font-size:22px;font-weight:800;color:'+d2.c+'">'+fmt(d2.tot)+' Kč</span></div><div style="font-size:10px;color:#999;text-align:right">= '+fmt(Math.round(d2.tot/a))+' Kč/m²</div></div>';}
 h+='</div>';
 
 var diff=totB-totA;
 var investDiff=diff>0?diff:0;
 var dotaceTotal=Math.round(calc.dotace*a);
 var investAfterDotace=Math.max(0,investDiff-dotaceTotal);
-/* ===== POROVNÁNÍ CENY ===== */
-var maxTot=Math.max(totA,totB);
-h+='<div style="background:#f8f9fa;border-radius:14px;padding:18px;margin-bottom:16px;border:1px solid #e0ddd5">';
-h+='<div style="font-size:14px;font-weight:700;color:#333;margin-bottom:14px">Porovnání celkové ceny</div>';
-/* Var A bar */
-h+='<div style="margin-bottom:12px">';
-h+='<div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:600;color:#d35400">Var. A — Omítka</span><span style="font-size:15px;font-weight:800;color:#d35400">'+fmt(totA)+' Kč</span></div>';
-h+='<div style="height:28px;background:#fce0cc;border-radius:6px;overflow:hidden;position:relative"><div style="height:100%;width:'+(maxTot>0?(totA/maxTot*100).toFixed(1):0)+'%;background:linear-gradient(90deg,#e67e22,#d35400);border-radius:6px;transition:width 0.3s"></div>';
-h+='<span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#333">'+fmt(Math.round(totA/(a||1)))+' Kč/m²</span></div>';
-h+='</div>';
-/* Var B bar */
-h+='<div style="margin-bottom:14px">';
-h+='<div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:600;color:#1e8449">Var. B — ETICS</span><span style="font-size:15px;font-weight:800;color:#1e8449">'+fmt(totB)+' Kč</span></div>';
-h+='<div style="height:28px;background:#c8f0d4;border-radius:6px;overflow:hidden;position:relative"><div style="height:100%;width:'+(maxTot>0?(totB/maxTot*100).toFixed(1):0)+'%;background:linear-gradient(90deg,#27ae60,#1e8449);border-radius:6px;transition:width 0.3s"></div>';
-h+='<span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#333">'+fmt(Math.round(totB/(a||1)))+' Kč/m²</span></div>';
-h+='</div>';
-/* difference */
-h+='<div style="display:flex;align-items:center;gap:12px;padding:12px;background:#ebf5fb;border-radius:10px;border:1px solid #aed6f1">';
-h+='<div style="font-size:28px;line-height:1">'+(diff>0?'📊':'✅')+'</div>';
-h+='<div style="flex:1"><div style="font-size:12px;color:#888">Rozdíl investice</div>';
-h+='<div style="font-size:22px;font-weight:800;color:#0f1b2d">'+fmt(Math.abs(diff))+' Kč <span style="font-size:13px;font-weight:600;color:#888">'+(diff>0?'více za ETICS':'více za omítku')+'</span></div>';
-h+='<div style="font-size:12px;color:#666;margin-top:2px">= '+fmt(Math.round(Math.abs(diff)/(a||1)))+' Kč/m² rozdíl</div>';
-h+='</div></div>';
+h+='<div style="background:#ebf5fb;border-radius:10px;padding:12px;text-align:center;border:1px solid #aed6f1;margin-bottom:8px"><span style="font-size:13px">Rozdíl investice: </span><span style="font-size:20px;font-weight:800;color:#0f1b2d">'+fmt(Math.abs(diff))+' Kč</span><span style="font-size:12px;color:#888"> '+(diff>0?'více za ETICS':'více za omítku')+'</span></div>';
 if(calc.dotace>0 && diff>0){
-h+='<div style="display:flex;align-items:center;gap:12px;padding:12px;background:#eafaf1;border-radius:10px;border:1px solid #a9dfbf;margin-top:10px">';
-h+='<div style="font-size:28px;line-height:1">🏛️</div>';
-h+='<div style="flex:1"><div style="font-size:12px;color:#888">Dotace NZÚ: '+calc.dotace+' Kč/m² × '+a+' m² = <b>−'+fmt(dotaceTotal)+' Kč</b></div>';
-h+='<div style="font-size:20px;font-weight:800;color:#1e8449">Po dotaci: '+fmt(investAfterDotace)+' Kč</div>';
-h+='<div style="font-size:12px;color:#666;margin-top:2px">= '+fmt(Math.round(investAfterDotace/(a||1)))+' Kč/m² po dotaci</div>';
-h+='</div></div>';
+h+='<div style="background:#eafaf1;border-radius:10px;padding:10px;text-align:center;border:1px solid #a9dfbf;margin-bottom:16px"><span style="font-size:12px">🏛️ Dotace NZÚ '+calc.dotace+' Kč/m² × '+a+' m² = <b>−'+fmt(dotaceTotal)+' Kč</b></span><br><span style="font-size:16px;font-weight:800;color:#1e8449">Investice po dotaci: '+fmt(investAfterDotace)+' Kč</span></div>';
 }
-h+='</div>';
 
+var td=timeData[m];
+h+='<div style="font-size:14px;font-weight:700;margin-bottom:8px">⏱ Časová náročnost</div>';
+var tvs=[{v:'A',c:'#d35400',l:'Var. A'},{v:'B',c:'#1e8449',l:'Var. B'}];
+for(var ti=0;ti<2;ti++){var tv=tvs[ti],tdi=td[tv.v];
+h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="width:50px;font-size:11px;font-weight:700;color:'+tv.c+'">'+tv.l+'</span><div style="flex:1;height:22px;background:#eee;border-radius:10px;overflow:hidden"><div style="height:100%;border-radius:10px;width:'+(tdi.days/40*100)+'%;background:'+tv.c+';min-width:45px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px"><span style="font-size:10px;color:#fff;font-weight:700">'+tdi.days+' dní</span></div></div><span style="width:60px;font-size:11px;color:#888;text-align:right">'+tdi.range+'</span></div>';}
 
 /* ========== NÁVRATNOST INVESTICE ========== */
 var uA=calcUvalueA();
@@ -1936,33 +1708,26 @@ var iTotal=0;
 for(var ii=0;ii<iSet.items.length;ii++){var it=iSet.items[ii];var itc=it.qty*it.jc;iTotal+=itc;
 h+='<tr><td style="text-align:left;font-size:10px">'+it.n+'</td><td>'+fmt(it.qty)+' '+it.j+'</td><td>'+fmt(it.jc)+'</td><td style="font-weight:700">'+fmt(itc)+'</td></tr>';}
 h+='<tr style="border-top:2px solid '+iSet.c+'"><td style="text-align:left;font-weight:800" colspan="3">MATERIÁL CELKEM</td><td style="font-weight:800;color:'+iSet.c+'">'+fmt(iTotal)+' Kč</td></tr>';
-h+='</table><div style="font-size:9px;color:#aaa;margin-top:4px">= '+fmt(Math.round(iTotal/(a||1)))+' Kč/m²</div></div>';
+h+='</table><div style="font-size:9px;color:#aaa;margin-top:4px">= '+fmt(Math.round(iTotal/a))+' Kč/m²</div></div>';
 }
 h+='</div>';
 }
 
-/* results cards — roční provozní náklady */
-var lossA=Math.round(annualLoss(uA,a,calc.hdd)), lossB=Math.round(annualLoss(uValB,a,calc.hdd));
-var maxLoss=Math.max(lossA,lossB); var maxCost=Math.max(costA_yr,costB_yr);
-h+='<div style="background:#f8f9fa;border-radius:14px;padding:18px;margin-bottom:14px;border:1px solid #e0ddd5">';
-h+='<div style="font-size:14px;font-weight:700;color:#333;margin-bottom:14px">Roční náklady na vytápění přes stěny</div>';
-/* Var A */
-h+='<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px">';
-h+='<div style="flex:1;min-width:200px;background:#fef5ec;border-radius:10px;padding:14px;border-left:4px solid #d35400">';
-h+='<div style="font-size:12px;font-weight:700;color:#d35400;margin-bottom:10px">Var. A — bez zateplení</div>';
-h+='<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;color:#555">Tepelná ztráta</span><span style="font-size:16px;font-weight:700;color:#333">'+fmt(lossA)+' kWh/rok</span></div>';
-h+='<div style="height:6px;background:#fce0cc;border-radius:3px;margin-bottom:10px"><div style="height:100%;width:100%;background:#d35400;border-radius:3px"></div></div>';
-h+='<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:13px;color:#555">Roční náklady</span><span style="font-size:20px;font-weight:800;color:#d35400">'+fmt(Math.round(costA_yr))+' Kč</span></div>';
-h+='<div style="font-size:11px;color:#888;margin-top:4px">U = '+uA.toFixed(3).replace('.',',')+' W/(m²·K) · = '+fmt(Math.round(costA_yr/12))+' Kč/měsíc</div>';
+/* results cards */
+h+='<div class="grid2" style="margin-bottom:14px">';
+/* annual costs */
+h+='<div class="cc" style="border-color:#d35400;background:#fef5ec">';
+h+='<div style="font-size:12px;font-weight:700;color:#d35400;margin-bottom:6px">Var. A — roční ztráty stěnami</div>';
+h+='<div style="display:flex;justify-content:space-between;font-size:12px"><span>Tepelná ztráta</span><b>'+fmt(Math.round(annualLoss(uA,a,calc.hdd)))+' kWh/rok</b></div>';
+h+='<div style="display:flex;justify-content:space-between;font-size:12px"><span>Náklady na vytápění</span><b>'+fmt(Math.round(costA_yr))+' Kč/rok</b></div>';
+h+='<div style="font-size:10px;color:#888;margin-top:4px">U = '+uA.toFixed(3).replace('.',',')+' W/(m²·K)</div>';
 h+='</div>';
-/* Var B */
-h+='<div style="flex:1;min-width:200px;background:#eafaf1;border-radius:10px;padding:14px;border-left:4px solid #1e8449">';
-h+='<div style="font-size:12px;font-weight:700;color:#1e8449;margin-bottom:10px">Var. B — se zateplením</div>';
-h+='<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;color:#555">Tepelná ztráta</span><span style="font-size:16px;font-weight:700;color:#333">'+fmt(lossB)+' kWh/rok</span></div>';
-h+='<div style="height:6px;background:#c8f0d4;border-radius:3px;margin-bottom:10px"><div style="height:100%;width:'+(maxLoss>0?(lossB/maxLoss*100).toFixed(1):0)+'%;background:#1e8449;border-radius:3px"></div></div>';
-h+='<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:13px;color:#555">Roční náklady</span><span style="font-size:20px;font-weight:800;color:#1e8449">'+fmt(Math.round(costB_yr))+' Kč</span></div>';
-h+='<div style="font-size:11px;color:#888;margin-top:4px">U = '+uValB.toFixed(3).replace('.',',')+' W/(m²·K) · = '+fmt(Math.round(costB_yr/12))+' Kč/měsíc</div>';
-h+='</div>';
+
+h+='<div class="cc" style="border-color:#1e8449;background:#eafaf1">';
+h+='<div style="font-size:12px;font-weight:700;color:#1e8449;margin-bottom:6px">Var. B — roční ztráty stěnami</div>';
+h+='<div style="display:flex;justify-content:space-between;font-size:12px"><span>Tepelná ztráta</span><b>'+fmt(Math.round(annualLoss(uValB,a,calc.hdd)))+' kWh/rok</b></div>';
+h+='<div style="display:flex;justify-content:space-between;font-size:12px"><span>Náklady na vytápění</span><b>'+fmt(Math.round(costB_yr))+' Kč/rok</b></div>';
+h+='<div style="font-size:10px;color:#888;margin-top:4px">U = '+uValB.toFixed(3).replace('.',',')+' W/(m²·K)</div>';
 h+='</div>';
 h+='</div>';
 
@@ -2014,9 +1779,6 @@ h+='<div style="position:relative;height:200px;border-left:2px solid #ccc;border
 /* Y-axis */
 var graphMax=Math.max(investAfterDotace*1.5, npvRes.npv30*1.05, investAfterDotace+saving_yr*5);
 if(graphMax<=0) graphMax=100000;
-/* Zaokrouhlit na hezká čísla */
-var roundTo=graphMax>500000?100000:(graphMax>100000?50000:(graphMax>50000?10000:5000));
-graphMax=Math.ceil(graphMax/roundTo)*roundTo;
 var ySteps=5;
 for(var gi=0;gi<=ySteps;gi++){
   var yPct=(gi/ySteps)*100;
@@ -2075,7 +1837,7 @@ h+='Skutečná úspora závisí na celkovém energetickém řešení budovy.</di
 h+='</div>';
 h+='</div>';
 
-h+='<div style="font-size:11px;color:#888;border-top:1px solid #e8e8e8;padding-top:10px">Na m²: Var. A = <b>'+fmt(Math.round(totA/(a||1)))+' Kč/m²</b> · Var. B = <b>'+fmt(Math.round(totB/(a||1)))+' Kč/m²</b>';
+h+='<div style="font-size:11px;color:#888;border-top:1px solid #e8e8e8;padding-top:10px">Na m²: Var. A = <b>'+fmt(Math.round(totA/a))+' Kč/m²</b> · Var. B = <b>'+fmt(Math.round(totB/a))+' Kč/m²</b>';
 if(insulType==='mw')h+='<br>⚠ Minerální vata je dražší než EPS, ale má lepší protipožární vlastnosti (A1 – nehořlavá) a difúzní otevřenost.';
 h+='</div>';
 
