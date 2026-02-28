@@ -1097,7 +1097,7 @@ var passA=D.uA<=0.18, passB=D.uB<=0.18;
 var h='';
 
 /* 1. U-HODNOTA */
-h+='<div class="param-card fade-in" style="animation-delay:0s"><div class="icon">\ud83c\udf21\ufe0f</div><h3>Součinitel prostupu tepla (U-hodnota)</h3><div class="desc">Čím nižší → tím lepší izolace. Dynamicky dle nastavení: <b>'+insulType.toUpperCase()+' '+insulThick+' mm</b></div><div style="clear:both"></div>';
+h+='<div class="param-card fade-in" style="animation-delay:0s"><div class="icon">🌡️</div><h3>Součinitel prostupu tepla (U-hodnota)</h3><div class="desc">Čím nižší → tím lepší izolace. Dynamicky dle nastavení: <b>'+insulType.toUpperCase()+' '+insulThick+' mm</b></div><div style="clear:both"></div>';
 h+='<div style="display:flex;gap:14px;margin:10px 0">';
 h+='<div class="val-box" style="background:#fef5ec;border:2px solid #d35400;border-radius:10px"><div style="font-size:11px;font-weight:600;color:#d35400;margin-bottom:4px">Var. A — Omítka</div><div class="val-big" style="color:#d35400">'+uAStr+'</div><div style="font-size:10px;color:#888">W/(m²·K)</div><div class="anim-bar" style="margin-top:8px"><div class="anim-fill" style="width:0%;background:#d35400" data-target="'+Math.round(D.uA/0.36*100)+'"></div></div><div style="font-size:11px;margin-top:4px">'+(passA?'✅ Pasivní':'❌ Nesplní pasivní (> 0,18)')+'</div></div>';
 h+='<div class="val-box" style="background:#eafaf1;border:2px solid #1e8449;border-radius:10px"><div style="font-size:11px;font-weight:600;color:#1e8449;margin-bottom:4px">Var. B — ETICS '+insulThick+' mm</div><div class="val-big" style="color:#1e8449">'+uBStr+'</div><div style="font-size:10px;color:#888">W/(m²·K)</div><div class="anim-bar" style="margin-top:8px"><div class="anim-fill" style="width:0%;background:#1e8449" data-target="'+Math.round(D.uB/0.36*100)+'"></div></div><div style="font-size:11px;margin-top:4px">'+(passB?'✅ Pasivní standard':'❌ Nesplní pasivní')+'</div></div></div>';
@@ -1555,10 +1555,10 @@ var workB=m==='s'?0:Math.round((m==='z'?560:739)*a),foodB=m==='s'?calc.hlp*36*35
 var uValB=calcUvalue(insulType,insulThick);
 var uStr=uValB.toFixed(2).replace('.',',');
 var passiveOk=uValB<=0.18;
-var timeData={s:{A:{days:22,range:'5\u20137 t\u00fdd.'},B:{days:36,range:'8\u201310 t\u00fdd.'}},z:{A:{days:12,range:'3\u20134 t\u00fdd.'},B:{days:18,range:'4\u20136 t\u00fdd.'}},f:{A:{days:7,range:'2\u20133 t\u00fdd.'},B:{days:10,range:'3\u20134 t\u00fdd.'}}};
+var timeData={s:{A:{days:22,range:'5–7 týd.'},B:{days:36,range:'8–10 týd.'}},z:{A:{days:12,range:'3–4 týd.'},B:{days:18,range:'4–6 týd.'}},f:{A:{days:7,range:'2–3 týd.'},B:{days:10,range:'3–4 týd.'}}};
 
 var h='<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px">';
-h+='<div style="flex:1;min-width:180px"><label style="font-size:12px;font-weight:600;color:#555">Plocha fasády</label><input type="range" class="sl" min="80" max="400" step="10" value="'+a+'" oninput="calc.area=+this.value;renderCalc()"><div style="text-align:center;font-size:22px;font-weight:800;color:#0f1b2d">'+a+' m\u00b2</div></div>';
+h+='<div style="flex:1;min-width:180px"><label style="font-size:12px;font-weight:600;color:#555">Plocha fasády</label><input type="range" class="sl" min="80" max="400" step="10" value="'+a+'" oninput="calc.area=+this.value;renderCalc()"><div style="text-align:center;font-size:22px;font-weight:800;color:#0f1b2d">'+a+' m²</div></div>';
 h+='<div style="flex:1;min-width:180px"><label style="font-size:12px;font-weight:600;color:#555">Kdo to bude dělat?</label><div style="display:flex;gap:5px;margin-top:6px">';
 var modes=[['s','Svépomocí'],['z','Živnostník'],['f','Firma']];
 for(var mi=0;mi<modes.length;mi++)h+='<button class="btn btn-s'+(m===modes[mi][0]?' on':'')+'" onclick="calc.mode=\''+modes[mi][0]+'\';renderCalc()">'+modes[mi][1]+'</button>';
@@ -1572,18 +1572,18 @@ h+='<div style="flex:1;min-width:170px"><label style="font-size:12px;font-weight
 h+='</div>';
 
 h+='<div style="background:#f4f9f4;border:2px solid #a9dfbf;border-radius:12px;padding:14px;margin-bottom:16px">';
-h+='<div style="font-size:13px;font-weight:700;color:#1e8449;margin-bottom:8px">\u2699\ufe0f Nastavení zateplení (Var. B) — sdíleno s řezem</div>';
+h+='<div style="font-size:13px;font-weight:700;color:#1e8449;margin-bottom:8px">⚙️ Nastavení zateplení (Var. B) — sdíleno s řezem</div>';
 h+='<div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">';
 h+='<div style="min-width:160px"><label style="font-size:11px;font-weight:600;color:#555">Typ izolace</label><div style="display:flex;gap:5px;margin-top:4px">';
 h+='<button class="btn btn-s'+(insulType==='eps'?' on':'')+'" onclick="setInsul(\'eps\');renderCalc()" style="font-size:11px;'+(insulType==='eps'?'background:#1e8449;border-color:#1e8449':'')+'">EPS 70F</button>';
 h+='<button class="btn btn-s'+(insulType==='mw'?' on':'')+'" onclick="setInsul(\'mw\');renderCalc()" style="font-size:11px;'+(insulType==='mw'?'background:#1e8449;border-color:#1e8449':'')+'">Min. vata</button>';
-h+='</div><div style="font-size:10px;color:#888;margin-top:3px">\u03bb = '+getInsulLambda(insulType).toFixed(3).replace('.',',')+' W/(m\u00b7K)</div></div>';
+h+='</div><div style="font-size:10px;color:#888;margin-top:3px">λ = '+getInsulLambda(insulType).toFixed(3).replace('.',',')+' W/(m·K)</div></div>';
 h+='<div style="flex:1;min-width:200px"><label style="font-size:11px;font-weight:600;color:#555">Tloušťka izolace</label><input type="range" class="sl" min="60" max="240" step="5" value="'+insulThick+'" oninput="setInsulThick(+this.value);renderCalc()" style="margin-top:4px"><div style="display:flex;justify-content:space-between;font-size:10px;color:#999"><span>60 mm</span><span style="font-size:16px;font-weight:800;color:#1e8449">'+insulThick+' mm</span><span>240 mm</span></div></div>';
-h+='<div style="min-width:130px;text-align:center"><label style="font-size:11px;font-weight:600;color:#555">U-hodnota Var. B</label><div style="font-size:24px;font-weight:800;color:'+(passiveOk?'#1e8449':'#c0392b')+';margin-top:4px">'+uStr+'</div><div style="font-size:10px;color:#888">W/(m\u00b2\u00b7K)</div><div style="font-size:10px;margin-top:3px">'+(passiveOk?'\u2705 pasivní':'\u274c nesplní pasivní')+'</div></div>';
+h+='<div style="min-width:130px;text-align:center"><label style="font-size:11px;font-weight:600;color:#555">U-hodnota Var. B</label><div style="font-size:24px;font-weight:800;color:'+(passiveOk?'#1e8449':'#c0392b')+';margin-top:4px">'+uStr+'</div><div style="font-size:10px;color:#888">W/(m²·K)</div><div style="font-size:10px;margin-top:3px">'+(passiveOk?'✅ pasivní':'❌ nesplní pasivní')+'</div></div>';
 h+='</div></div>';
 
 h+='<div class="grid2" style="margin-bottom:14px">';
-var variants=[{v:'A',c:'#d35400',bg:'#fef5ec',lb:'Var. A \u2014 Omítka'+(calc.inclPTH?'':' (bez PTH)'),mat:matA,les:lesA,pres:presA,work:workA,food:foodA,tool:toolA,tot:totA},{v:'B',c:'#1e8449',bg:'#eafaf1',lb:'Var. B \u2014 '+(insulType==='eps'?'EPS':'MW')+' '+insulThick+'mm'+(calc.inclPTH?'':' (bez PTH)'),mat:matB,les:lesB,pres:presB,work:workB,food:foodB,tool:toolB,tot:totB}];
+var variants=[{v:'A',c:'#d35400',bg:'#fef5ec',lb:'Var. A — Omítka'+(calc.inclPTH?'':' (bez PTH)'),mat:matA,les:lesA,pres:presA,work:workA,food:foodA,tool:toolA,tot:totA},{v:'B',c:'#1e8449',bg:'#eafaf1',lb:'Var. B — '+(insulType==='eps'?'EPS':'MW')+' '+insulThick+'mm'+(calc.inclPTH?'':' (bez PTH)'),mat:matB,les:lesB,pres:presB,work:workB,food:foodB,tool:toolB,tot:totB}];
 for(var vi=0;vi<2;vi++){var d2=variants[vi];
 h+='<div class="cc" style="border-color:'+d2.c+';background:'+d2.bg+'"><div style="font-size:13px;font-weight:700;color:'+d2.c+';margin-bottom:8px">'+d2.lb+'</div><div style="font-size:12px">';
 h+='<div style="display:flex;justify-content:space-between"><span>Materiál</span><b>'+fmt(d2.mat)+' Kč</b></div>';
@@ -1604,7 +1604,7 @@ h+='<div style="background:#eafaf1;border-radius:10px;padding:10px;text-align:ce
 }
 
 var td=timeData[m];
-h+='<div style="font-size:14px;font-weight:700;margin-bottom:8px">\u23f1 Časová náročnost</div>';
+h+='<div style="font-size:14px;font-weight:700;margin-bottom:8px">⏱ Časová náročnost</div>';
 var tvs=[{v:'A',c:'#d35400',l:'Var. A'},{v:'B',c:'#1e8449',l:'Var. B'}];
 for(var ti=0;ti<2;ti++){var tv=tvs[ti],tdi=td[tv.v];
 h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="width:50px;font-size:11px;font-weight:700;color:'+tv.c+'">'+tv.l+'</span><div style="flex:1;height:22px;background:#eee;border-radius:10px;overflow:hidden"><div style="height:100%;border-radius:10px;width:'+(tdi.days/40*100)+'%;background:'+tv.c+';min-width:45px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px"><span style="font-size:10px;color:#fff;font-weight:700">'+tdi.days+' dní</span></div></div><span style="width:60px;font-size:11px;color:#888;text-align:right">'+tdi.range+'</span></div>';}
@@ -1836,8 +1836,8 @@ h+='Skutečná úspora závisí na celkovém energetickém řešení budovy.</di
 h+='</div>';
 h+='</div>';
 
-h+='<div style="font-size:11px;color:#888;border-top:1px solid #e8e8e8;padding-top:10px">Na m\u00b2: Var. A = <b>'+fmt(Math.round(totA/a))+' Kč/m\u00b2</b> \u00b7 Var. B = <b>'+fmt(Math.round(totB/a))+' Kč/m\u00b2</b>';
-if(insulType==='mw')h+='<br>\u26a0 Minerální vata je dražší než EPS, ale má lepší protipožární vlastnosti (A1 \u2013 nehořlavá) a difúzní otevřenost.';
+h+='<div style="font-size:11px;color:#888;border-top:1px solid #e8e8e8;padding-top:10px">Na m²: Var. A = <b>'+fmt(Math.round(totA/a))+' Kč/m²</b> · Var. B = <b>'+fmt(Math.round(totB/a))+' Kč/m²</b>';
+if(insulType==='mw')h+='<br>⚠ Minerální vata je dražší než EPS, ale má lepší protipožární vlastnosti (A1 – nehořlavá) a difúzní otevřenost.';
 h+='</div>';
 
 document.getElementById('calcUI').innerHTML=h;
